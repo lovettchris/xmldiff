@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
-    <projectUrl>https://github.com/microsoft/XmlNotepad/</projectUrl>
-    <repository type="git" url="https://github.com/microsoft/XmlNotepad/"/>
+    <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
+    <repository type="git" url="https://github.com/lovettchris/xmldiff"/>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright © 2020 Lovett Software.</copyright>
+    <copyright>Copyright © 2021 Lovett Software.</copyright>
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
     <dependencies>
