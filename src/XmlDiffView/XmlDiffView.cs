@@ -1946,9 +1946,8 @@ namespace Microsoft.XmlDiffPatch
                 .match { }
                 .ignore { color:#AAAAAA; }
                 .add { background-color:yellow; }
-                .moveto { background-color:cyan; color:navy; }
+                .moved { background-color:cyan; color:navy; }
                 .remove { background-color:red; }
-                .movefrom {  background-color:cyan; color:navy; }
                 .change {  background-color:lightgreen;  }
                 -->
             </style></head>
@@ -1960,8 +1959,7 @@ namespace Microsoft.XmlDiffPatch
                     <b>Legend:</b> <span class='add'>added</span>&nbsp;&nbsp;
                         <span class='remove'>removed</span>&nbsp;&nbsp;
                         <span class='change'>changed</span>&nbsp;&nbsp;
-                        <span class='movefrom'>moved from</span>&nbsp;&nbsp;
-                        <span class='moveto'>moved to</span>&nbsp;&nbsp;
+                        <span class='moved'>moved</span>&nbsp;&nbsp;
                         <span class='ignore'>ignored</span><br/><br/>
                     </td></tr>");
             resultHtml.WriteLine("<tr><td><table border='0'>");
