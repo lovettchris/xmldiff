@@ -398,19 +398,32 @@ public class XmlDiff
                                                                     new XmlNamespaceManager( nameTable ), 
                                                                     string.Empty, 
                                                                     System.Xml.XmlSpace.Default );
-        using (var sourceStream = new FileStream(sourceFile, FileMode.Open, FileAccess.Read))
-        {
-            using (var changedStream = new FileStream(changedFile, FileMode.Open, FileAccess.Read))
-            {
-                XmlTextReader tr = new XmlTextReader(sourceStream, XmlNodeType.Element, sourceParserContext);
-                tr.XmlResolver = null;
-                sourceReader = tr;
 
-                tr = new XmlTextReader(changedStream, XmlNodeType.Element, changedParserContext);
-                tr.XmlResolver = null;
-                changedReader = tr;
-            }
-        }       
+        // don't use "using (var sourceStream = ...)" as it will be closed before being used through the XmlReader returned by reference
+        // stream will eventually be closed when the reader itself is closed, or in the catch if something went wrong on the way
+        FileStream sourceStream = null;
+        FileStream changedStream = null;
+        try
+        {
+            sourceStream = new FileStream(sourceFile, FileMode.Open, FileAccess.Read);
+            changedStream = new FileStream(changedFile, FileMode.Open, FileAccess.Read);
+
+            XmlTextReader tr = new XmlTextReader(sourceStream, XmlNodeType.Element, sourceParserContext);
+            tr.XmlResolver = null;
+            sourceReader = tr;
+
+            tr = new XmlTextReader(changedStream, XmlNodeType.Element, changedParserContext);
+            tr.XmlResolver = null;
+            changedReader = tr;
+        }
+        catch
+        {
+            sourceStream?.Close();
+            changedStream?.Close();
+            sourceReader = null;
+            changedReader = null;
+            throw;
+        }
     }
 
     /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare3"]/*' />
