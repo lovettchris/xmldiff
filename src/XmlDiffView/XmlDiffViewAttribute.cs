@@ -272,7 +272,7 @@ namespace Microsoft.XmlDiffPatch
         /// due to a change in an attribute.
         /// </summary>
         /// <param name="writer">output stream</param>
-        /// <param name="attr">Attribute object</param>
+        /// <param name="ignorePrefixes">Whether to ignore xml prefixes</param>
         /// <param name="typeOfDifference">type of difference</param>
         public void DrawHtmlAttribute(
             XmlWriter writer,
@@ -337,11 +337,11 @@ namespace Microsoft.XmlDiffPatch
         /// to changing attribute data.
         /// </summary>
         /// <param name="writer">output stream</param>
-        /// <param name="attr">Attribute object</param>
         /// <param name="localName">name of attribute 
         /// (without the prefix)</param>
         /// <param name="prefix">xml attribute prefix</param>
         /// <param name="attributeValue">The value for the attribute.</param>
+        /// <param name="ignorePrefixes">Whether to ignore prefixes.</param>
         public void DrawHtmlAttributeChange(
             XmlWriter writer,
             string localName,

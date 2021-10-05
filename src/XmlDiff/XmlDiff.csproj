@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net4;net452;net46;net47;net48;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net4;net452;net46;net47;net48;netcoreapp3.1;net5.0</TargetFrameworks>
     <DefineConstants>MEASURE_PERF;TRACE;DESCRIPTORS;DESCRIPTOR_MOVE;DESCRIPTOR_PREFIX_OR_NAMESPACE;VERIFY_HASH_VALUES</DefineConstants>
     <PackageId>XmlDiffPatch</PackageId>
     <Copyright>Copyright © Microsoft</Copyright>
@@ -19,7 +19,11 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <Description>A library that compares XML files</Description>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.1|AnyCPU'">
+    <DocumentationFile>d:\git\lovettchris\xmldiff\src\XmlDiff\XmlDiffPatch.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

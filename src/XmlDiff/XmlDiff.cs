@@ -21,35 +21,66 @@ namespace Microsoft.XmlDiffPatch
 //
 // XmlDiffOptions
 //
-/// <include file='doc\XmlDiffOptions.uex' path='docs/doc[@for="XmlDiffOptions"]/*' />
 /// <summary>
 /// Options for comparing XML documents. 
 /// </summary>
 public enum XmlDiffOptions 
 {
+    /// <summary>
+    /// No special options.
+    /// </summary>
     None                 = 0x0,
+    /// <summary>
+    /// Ignore order of children when comparing them.
+    /// </summary>
     IgnoreChildOrder     = 0x1,
+    /// <summary>
+    /// Ignore comments entirely.
+    /// </summary>
     IgnoreComments       = 0x2,
+    /// <summary>
+    /// Ignore processing instructions.
+    /// </summary>
     IgnorePI             = 0x4,
+    /// <summary>
+    /// Ignore all insignificant whitespace.
+    /// </summary>
     IgnoreWhitespace     = 0x8,
+    /// <summary>
+    /// Ignore the namespace qualified part of any XML names.
+    /// </summary>
     IgnoreNamespaces     = 0x10,
+    /// <summary>
+    /// Ignore the specific namespace prefixes chosen, but compare the namespare URI's instead.
+    /// </summary>
     IgnorePrefixes       = 0x20,
+    /// <summary>
+    /// Ignore any XML declarations.
+    /// </summary>
     IgnoreXmlDecl        = 0x40,
+    /// <summary>
+    /// Ignore the DOCTYPE tag and any DTD contents therein.
+    /// </summary>
     IgnoreDtd            = 0x80,
 }
 
-//
-// XmlDiffAlgorithm
-//
-/// <include file='doc\XmlDiffAlgorithm.uex' path='docs/doc[@for="XmlDiffAlgorithm"]/*' />
 /// <summary>
-///   Types of algorithms that can be used for comparing XML documents by XmlDiff. Auto means XmlDiff will
-///   automatically decide which algorithm to use for the particular case depending on the assumed number 
-///   of changes.
+/// Types of algorithms that can be used for comparing XML documents by XmlDiff. Auto means XmlDiff will
+/// automatically decide which algorithm to use for the particular case depending on the assumed number 
+/// of changes.
 /// </summary>
 public enum XmlDiffAlgorithm {
+    /// <summary>
+    /// Automatically decide which algorithm to use.
+    /// </summary>
     Auto,
+    /// <summary>
+    /// Favor the fastest algorithm.
+    /// </summary>
     Fast,
+    /// <summary>
+    /// Favor accuracy of the diff.
+    /// </summary>
     Precise,
 }
 
@@ -123,11 +154,9 @@ internal enum TriStateBool {
 
 
 //////////////////////////////////////////////////////////////////
-// XmlPatch
-//
-/// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff"]/*' />
+
 /// <summary>
-///    Compares two documents or fragments. 
+/// Compares two documents or fragments. 
 /// </summary>
 public class XmlDiff
 {
@@ -195,11 +224,10 @@ public class XmlDiff
 
     // Performance measurement
 #if MEASURE_PERF
-    public XmlDiffPerf _xmlDiffPerf = new XmlDiffPerf();
+    internal XmlDiffPerf _xmlDiffPerf = new XmlDiffPerf();
 #endif
 
 // Constructors
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.XmlDiff1"]/*' />
     /// <summary>
     ///    Constructs XmlDiff object with default options.
     /// </summary>
@@ -211,7 +239,6 @@ public class XmlDiff
 #endif
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.XmlDiff2"]/*' />
     /// <summary>
     ///    Constructs XmlDiff object with the given options. The values of XmlDiffOptions
     ///    may be combined using the operator '|'.
@@ -222,7 +249,6 @@ public class XmlDiff
     }
 
 // Properties
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.NamespaceUri"]/*' />
     /// <summary>
     ///    XmlDiff namespace. The diffgram nodes belongs to this namespace.
     /// </summary>
@@ -231,26 +257,22 @@ public class XmlDiff
     internal const string XmlnsNamespaceUri = "http://www.w3.org/2000/xmlns/";
 
 	// Options flags
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreChildren"]/*' />
     /// <summary>
     ///    If true, the order of child nodes of each element will be ignored when comparing 
     ///    the documents/fragments.
     /// </summary>
     public bool IgnoreChildOrder { get { return _bIgnoreChildOrder; } set { _bIgnoreChildOrder = value; } }
     
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreComments"]/*' />
     /// <summary>
     ///    If true, all comments in the compared documents/fragments will be ignored.
     /// </summary>
     public bool IgnoreComments   { get { return _bIgnoreComments; }   set { _bIgnoreComments = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnorePI"]/*' />
     /// <summary>
     ///    If true, all processing instructions in the compared documents/fragments will be ignored.
     /// </summary>
     public bool IgnorePI		 { get { return _bIgnorePI ; }		  set { _bIgnorePI = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreWhitespace"]/*' />
     /// <summary>
     ///    If true, all whitespace nodes in the compared documents/fragments will be ignored. Also, all
     ///    text nodes and values of attributes will be normalized; whitespace sequences will be replaced
@@ -258,33 +280,28 @@ public class XmlDiff
     /// </summary>
     public bool IgnoreWhitespace { get { return _bIgnoreWhitespace; } set { _bIgnoreWhitespace = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreNamespace"]/*' />
     /// <summary>
     ///    If true, the namespaces will be ignored when comparing the names of elements and attributes.
     ///    This also mean that the prefixes will be ignored too as if the IgnorePrefixes option is true.
     /// </summary>
     public bool IgnoreNamespaces { get { return _bIgnoreNamespaces; } set { _bIgnoreNamespaces = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnorePrefixes"]/*' />
     /// <summary>
     ///    If true, the prefixes will be ignored when comparing the names of elements and attributes. 
     ///    The namespaces will not ne ignored unless IgnoreNamespaces flag is true.
     /// </summary>
     public bool IgnorePrefixes   { get { return _bIgnorePrefixes;   } set { _bIgnorePrefixes = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreXmlDecl"]/*' />
     /// <summary>
     ///    If true, the xml declarations will not be compared.
     /// </summary>
     public bool IgnoreXmlDecl    { get { return _bIgnoreXmlDecl;    } set { _bIgnoreXmlDecl = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.IgnoreDtd"]/*' />
     /// <summary>
     ///    If true, the xml declarations will not be compared.
     /// </summary>
     public bool IgnoreDtd        { get { return _bIgnoreDtd;        } set { _bIgnoreDtd = value; } }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Options"]/*' />
     /// <summary>
     ///    Options used when comparing xml documents/fragments.
     /// </summary>
@@ -302,7 +319,6 @@ public class XmlDiff
         }
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Algorithm"]/*' />
     /// <summary>
     ///    Algorithm that will be used for XML comparison.
     /// </summary>
@@ -316,7 +332,6 @@ public class XmlDiff
     }
 
 // Methods
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare1"]/*' />
     /// <summary>
     ///    Compares two XML documents or fragments.
     /// </summary>
@@ -329,7 +344,6 @@ public class XmlDiff
         return Compare( sourceFile, changedFile, bFragments, null );
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare2"]/*' />
     /// <summary>
     ///    Compares two XML documents or fragments. 
     ///    If the diffgramWriter parameter is not null it will contain the list of changes 
@@ -426,26 +440,24 @@ public class XmlDiff
         }
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare3"]/*' />
     /// <summary>
     ///    Compares two XML documents or fragments.
     /// </summary>
     /// <param name="sourceReader">XmlReader representing the original xml document or fragment.</param>
-    /// <param name="changedFile">XmlReaser representing the changed xml document or fragment.</param>
+    /// <param name="changedReader">XmlReader representing the changed xml document or fragment.</param>
     /// <returns>True, if the documents/fragments are identical.</returns>
     public bool Compare( XmlReader sourceReader, XmlReader changedReader ) 
     {
         return Compare( sourceReader, changedReader, null );
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare4"]/*' />
     /// <summary>
     ///    Compares two XML documents or fragments.
     ///    If the diffgramWriter parameter is not null it will contain the list of changes 
     ///    between the two XML documents/fragments (diffgram).
     /// </summary>
     /// <param name="sourceReader">XmlReader representing the original xml document or fragment.</param>
-    /// <param name="changedFile">XmlReaser representing the changed xml document or fragment.</param>
+    /// <param name="changedReader">XmlReader representing the changed xml document or fragment.</param>
     /// <param name="diffgramWriter">XmlWriter object for returning the list of changes (diffgram).</param>
     /// <returns>True, if the documents/fragments are identical.</returns>
     public bool Compare( XmlReader sourceReader, XmlReader changedReader, XmlWriter diffgramWriter ) 
@@ -496,22 +508,17 @@ public class XmlDiff
         }
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare5"]/*' />
     /// <summary>
-    ///    Compares two XML nodes.
-    ///    If the diffgramWriter parameter is not null it will contain the list of changes 
-    ///    between the two XML documents/fragments (diffgram).
+    /// Compares two XML nodes.  
     /// </summary>
     /// <param name="sourceNode">Original XML node</param>
     /// <param name="changedNode">Changed XML node</param>
-    /// <param name="diffgramWriter">XmlWriter object for returning the list of changes (diffgram).</param>
     /// <returns>True, if the documents/fragments are identical.</returns>
     public bool Compare( XmlNode sourceNode, XmlNode changedNode )
     {
         return Compare( sourceNode, changedNode, null );
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.Compare6"]/*' />
     /// <summary>
     ///    Compares two XML nodes.
     ///    If the diffgramWriter parameter is not null it will contain the list of changes 
@@ -1544,7 +1551,6 @@ public class XmlDiff
                (int)op <= (int)XmlDiffOperation.ChangeElementAttr3;
     }
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.ParseOptions"]/*' />
     /// <summary>
     ///    Translates string representation of XmlDiff options into XmlDiffOptions enum.
     /// </summary>
@@ -1608,7 +1614,6 @@ public class XmlDiff
 
 
 
-    /// <include file='doc\XmlDiff.uex' path='docs/doc[@for="XmlDiff.VerifySource"]/*' />
     /// <summary>
     ///    Given a diffgram, this method verifies whether the given document/node is the original
     ///    source document/node for the diffgram. 

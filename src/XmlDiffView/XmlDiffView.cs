@@ -244,12 +244,12 @@ namespace Microsoft.XmlDiffPatch
 
         #region Public non-static methods section
 
-        public static int NextOperationId
+        internal static int NextOperationId
         {
             get { return nextOperationId++; }
         }
 
-        public static int LastOperationId
+        internal static int LastOperationId
         {
             get { return nextOperationId; }
         }
@@ -262,7 +262,7 @@ namespace Microsoft.XmlDiffPatch
         /// diffgram data into the XmlDiffViewDocument object. 
         /// </summary>
         /// <param name="sourceXml">baseline data</param>
-        /// <param name="diffgram">diffgram data stream</param>
+        /// <param name="diffGram">diffgram data stream</param>
         public void Load(XmlTextReader sourceXml, XmlReader diffGram)
         {
             nextOperationId = 1;
@@ -383,8 +383,6 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="changedXmlFile">actual file</param>
         /// <param name="fragment">This is an xml data frament</param>
         /// <param name="options">Comparison options</param>
-        /// <param name="reader">A reference to return readable 
-        /// formatted xml-like text.</param>
         /// <returns>data is identical</returns>
         public XmlDiffViewResults DifferencesAsFormattedText(
             string sourceXmlFile,
@@ -505,7 +503,6 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="changedXmlFile">the actual (or target) file</param>
         /// <param name="fragment">the file is only an Xml fragment</param>
         /// <param name="options">comparison filtering options</param>
-        /// <param name="reader">Readable output data stream</param>
         /// <returns>Differences were not found after filtering.</returns>
         public XmlDiffViewResults DifferencesSideBySideAsHtml(
             string sourceXmlFile,

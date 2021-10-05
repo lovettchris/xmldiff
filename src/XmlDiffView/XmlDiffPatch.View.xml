@@ -1,0 +1,2179 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XmlDiffPatch.View</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.XmlDiffPatch.Difference">
+            -----------------------------------------------------------------------------
+            <summary>
+            Class to contain constants for all text relating to 
+            differences in the xml and used for formatting the 
+            output as text.
+            </summary>
+            <history>
+            	[barryw] 2/24/2005 Created
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.NodeDifferences">
+            <summary>
+            Constant for the name of the root node for the output
+            in text format. When using, prefix
+            with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.Tag">
+            <summary>
+            Constant for the prefix which indicates xml
+            differences.
+            </summary>
+            <remarks>The underscore character is used
+             as a separator because it is an allowed 
+             character in a node name.
+             </remarks>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.ChangeBegin">
+            <summary>
+            Constant to indicate the start of a changed 
+            value statement. When using, prefix
+            with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.ChangeTo">
+            <summary>
+            Constant to indicate the middle ('To' portion)
+            of a changed value statement.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.ChangeEnd">
+            <summary>
+            Constant to indicate the end
+            of a changed value statement.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.AttributeAddedBegin">
+            <summary>
+            Constant to indicate the start of the name of 
+            an added attribute. When using, prefix
+            with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.AttributeAddedEnd">
+            <summary>
+            Constant to indicate the end of the name of 
+            an added attribute.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.AttributeDeletedBegin">
+            <summary>
+            Constant to indicate the start of the name of 
+            a deleted attribute. When using, prefix
+            with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.AttributeDeletedEnd">
+            <summary>
+            Constant to indicate the end of the name of 
+            a deleted attribute.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.NodeAdded">
+            <summary>
+            Constant to indicate 
+            an additional node (and its attributes and 
+            children). When using, prefix with the 'Tag'
+            constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.NodeDeleted">
+            <summary>
+            Constant to indicate 
+            a deleted node (and its attributes and 
+            children). When using, prefix with the 'Tag'
+            constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextAddedBegin">
+            <summary>
+            Constant to indicate the start of the added text, e.g., 
+            the value of an added node value, or comments. When 
+            using, prefix with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextAddedEnd">
+            <summary>
+            Constant to indicate the end of the added text, e.g., value of 
+            an added node value, or comments.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextDeletedBegin">
+            <summary>
+            Constant to indicate the start of the value of 
+            a deleted node value. When using, prefix
+            with the 'Tag' constant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextDeletedEnd">
+            <summary>
+            Constant to indicate the end of the value of 
+            a deleted node value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextMovedFromBegin">
+            <summary>
+            CharData, Comment, or Text moved from this position,
+            when using append the OperationId number.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.Difference.TextMovedToBegin">
+            <summary>
+            CharData, Comment, or Text moved to this position,
+            when using append the OperationId number.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.Indent">
+            <summary>
+            Class to contains all constants used 
+            to set the indentation of output text
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.OperationDescriptor">
+            <summary>
+                Class to associate an operation identification number 
+                (which is the key to a hashtable), and the type of
+                the data changes to a list of nodes which identifies 
+                the location of the change.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.operationId">
+            <summary>
+            Change operation identifer, used to indicate the 
+            from/to changes in the position of data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.operationType">
+            <summary>
+            The type of change in data.
+            </summary>
+            <example>Move, Prefix change, and 
+            Namespace change</example>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.nodeList">
+            <summary>
+            Declares a local copy of a list of (baseline data?) nodes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.OperationDescriptor.#ctor(System.Int32,Microsoft.XmlDiffPatch.OperationDescriptor.Type)">
+            <summary>
+             Constructor
+            </summary>
+            <param name="opid">Operation identification number</param>
+            <param name="type">Type of change in the data</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.OperationDescriptor.Type">
+            <summary>
+            Enumerator for the types of changes in the data. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.Type.Move">
+            <summary>
+            The data was moved
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.Type.NamespaceChange">
+            <summary>
+            The namespace data was changed
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.OperationDescriptor.Type.PrefixChange">
+            <summary>
+            The xml prefix was changed
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.OperationDescriptor.OperationType">
+            <summary>
+            Gets the type of change in the data. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.OperationDescriptor.NodeList">
+            <summary>
+            Gets the nodes which identify the location of the data change.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.Tags">
+            -----------------------------------------------------------------------------
+            <summary>
+            Class to contain constants for all text Xml-like and other
+            tags used for formatting the output as text.
+            </summary>
+            <history>
+            	[barryw] 2/24/2005 Created
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPath">
+            <summary>
+            Class to provide lists of nodes and attributes
+            based on proprietary alphanumeric path statements
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectNodes(Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,System.String)">
+            <summary>
+            Gets the list of nodes or attributes below the position indicated
+            </summary>
+            <param name="rootNode">The root node for the xml data</param>
+            <param name="currentParentNode">The current node</param>
+            <param name="xmlDiffPathExpr">Proprietary path statement separator or character</param>
+            <returns>List of nodes or attributes</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectAbsoluteNodes(Microsoft.XmlDiffPatch.XmlDiffViewParentNode,System.String)">
+            <summary>
+            Gets a list of node objects corresponding to
+            the proprietary path reference provided. 
+            </summary>
+            <param name="rootNode">The starting node</param>
+            <param name="path">Absolute path reference to node of interest</param>
+            <returns>list of node objects</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectAllAttributes(Microsoft.XmlDiffPatch.XmlDiffViewElement)">
+            <summary>
+            Gets a list of the attributes for the specifed node
+            and if applicable, its children.
+            </summary>
+            <param name="parentElement">The node which 
+            contains the attributes</param>
+            <returns>List of attributes</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectAttributes(Microsoft.XmlDiffPatch.XmlDiffViewElement,System.String)">
+            <summary>
+            Gets a list of attribute objects based on the location
+            specified.
+            </summary>
+            <param name="parentElement">Node at which to start the path search</param>
+            <param name="path">Proprietary alphanumeric path statement</param>
+            <returns>list of attribute objects</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectAllChildren(Microsoft.XmlDiffPatch.XmlDiffViewParentNode)">
+            <summary>
+            Gets a list of all node objects at and below the location
+            specified.
+            </summary>
+            <param name="parentNode">Node at which to start</param>
+            <returns>list of node objects</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.SelectChildNodes(Microsoft.XmlDiffPatch.XmlDiffViewParentNode,System.String,System.Int32)">
+            <summary>
+            Gets the list of child nodes below the position indicated
+            </summary>
+            <param name="parentNode">The current node</param>
+            <param name="path">Proprietary path statement</param>
+            <param name="startPos">Position in the path statement 
+            at which to start collecting node objects.</param>
+            <returns>list of child nodes</returns>
+            <returns>List of nodes or attributes</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.ReadPosition(System.String,System.Int32@)">
+            <summary>
+            Gets the numeric value at the specified
+            position in the statement
+            </summary>
+            <param name="str">Statement to search</param>
+            <param name="pos">Position at which to start the search</param>
+            <returns>Representation of the position in the absolute path to the node</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.ReadAttrName(System.String,System.Int32@)">
+            <summary>
+            Returns the sub-string representing the attribute name which
+            starts at the specified position in the provided statement
+            and ends just before a vertical bar character or the end 
+            of the specifed statement.
+            </summary>
+            <param name="str">Statement to search</param>
+            <param name="pos">Position at which to start the search</param>
+            <returns>attribute name</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.OnInvalidExpression(System.String)">
+            <summary>
+            Throws an 'invalid XmlDiffPath expression' exception.
+            </summary>
+            <param name="path">Proprietary alphanumeric path statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPath.OnNoMatchingNode(System.String)">
+            <summary>
+            Throws an 'no matching node' exception.
+            </summary>
+            <param name="path">Proprietary alphanumeric path statement</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList">
+            <summary>
+            Class which provides methods 
+            to navigate sibling nodes. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.count">
+            <summary>
+            Number of sibling nodes in the list of data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.chunks">
+            <summary>
+            Collection of sibling nodes
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.lastChunk">
+            <summary>
+            Reference to the previous collection of sibling nodes
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.currentChunk">
+            <summary>
+            Reference to collection of sibling nodes
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.currentChunkIndex">
+            <summary>
+            The index to the current collection of
+            sibling nodes
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.Current">
+            <summary>
+            Gets the current sibling node.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.Count">
+            <summary>
+            Gets the number of sibling nodes
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.MoveNext">
+            <summary>
+            Move to the next list (branch) of nodes
+            </summary>
+            <returns>Moved to the next list of nodes</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.Reset">
+            <summary>
+            Reset the position in the lists of nodes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.AddNode(Microsoft.XmlDiffPatch.XmlDiffViewNode)">
+            <summary>
+            Adds a node to the current list of data.
+            </summary>
+            <param name="node">Node object to add</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk">
+            <summary>
+            Class to provide an array in which
+            to hold nodes and the ability to navigate
+            the array.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.ChunkSize">
+            <summary>
+            Maximum number of nodes in the list.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.nodes">
+            <summary>
+            Create the list of nodes object. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.count">
+            <summary>
+            Number of nodes in the list.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.next">
+            <summary>
+            Initialize the next chuck of data.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.Count">
+            <summary>
+            Gets the number of nodes (chunks of
+            data) in the current list (branch) of data. Read only.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.Next">
+            <summary>
+            Gets or sets the next chuck of data 
+            </summary>
+            <value>Reference to the next list of nodes</value>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.Item(System.Int32)">
+            <summary>
+            Gets a node based on its index in the collection.
+            </summary>
+            <param name="index">index to node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathMultiNodeList.ListChunk.AddNode(Microsoft.XmlDiffPatch.XmlDiffViewNode)">
+            <summary>
+            Adds a node object to the collection.
+            </summary>
+            <param name="node">node object to add</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPathNodeList">
+            <summary>
+            Abstract class to provides methods to navigate nodes.  
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathNodeList.Current">
+            <summary>
+             Gets the current node.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathNodeList.Count">
+            <summary>
+            Gets the number of nodes in the list
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathNodeList.AddNode(Microsoft.XmlDiffPatch.XmlDiffViewNode)">
+            <summary>
+            Add a node to the current list of data.
+            </summary>
+            <param name="node">Node object to add</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathNodeList.Reset">
+            <summary>
+            Reset the position in the list of nodes.  
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathNodeList.MoveNext">
+            <summary>
+            Move to the next list of nodes 
+            </summary>
+            <returns>Moved to the next list of nodes</returns>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList">
+            <summary>
+            Class to create a collection containing only a single node.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.node">
+            <summary>
+            Declares a node object.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.state">
+            <summary>
+            Initialize the nodes state. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.State">
+            <summary>
+            Node states
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.State.BeforeNode">
+            <summary>
+            Positioned before the node
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.State.OnNode">
+            <summary>
+            Positioned on the node
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.State.AfterNode">
+            <summary>
+            Positioned after the node
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.Count">
+            <summary>
+            Gets the count of the nodes in the list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.Current">
+            <summary>
+            Gets a reference to the current node.  Returns 
+            null if not positioned on the node. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.Node">
+            <summary>
+            Gets a reference to the node regardless of its state. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.NodePostion">
+            <summary>
+            Sets the state of the node.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.MoveNext">
+            <summary>
+            Change the state of the node's position.
+            </summary>
+            <returns>Changed the node's position state</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.Reset">
+            <summary>
+            Reset the nodes position
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPathSingleNodeList.AddNode(Microsoft.XmlDiffPatch.XmlDiffViewNode)">
+            <summary>
+            Add a node to the list.  This method should only be 
+            called once otherwise an exception will be raised.
+            </summary>
+            <param name="node">The node to add</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewOperation">
+            <summary>
+            Enumerator values for types of differences
+            (Match indicates no difference) 
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.Match">
+            <summary>
+            Data matches
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.Ignore">
+            <summary>
+            Data differences will be ignored
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.Add">
+            <summary>
+            Data was added
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.MoveTo">
+            <summary>
+            Data was moved to here
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.Remove">
+            <summary>
+            Data was removed
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.MoveFrom">
+            <summary>
+            Data was moved from here
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewOperation.Change">
+            <summary>
+            Data was changed
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffView">
+            <summary>
+            Class which provides the external methods
+            and properties to use this library.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.DeltaIndent">
+            <summary>
+            Size of the incremental indentation
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.HtmlWriteToPane">
+            <summary>
+            Operation settings to control writing to 
+            the baseline and actual "panes" of the html.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.Nbsp">
+            <summary>
+            String used to set a required number html space characters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.viewDocument">
+            <summary>
+            Declares a view document to hold the merged data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.descriptors">
+            <summary>
+            Creates a hash table of change short descriptions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.diffgram">
+            <summary>
+            Declares a memory stream to hold the diffgram.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.outputData">
+            <summary>
+            Declares a TextWriter object to hold the output data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.finalOutput">
+            <summary>
+            Stores the final output.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreChildOrder">
+            <summary>
+            Initializes the child order option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreComments">
+            <summary>
+            Initializes the comments option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignorePI">
+            <summary>
+            Initializes the programming instructions node type option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreWhitespace">
+            <summary>
+            Initializes the white space option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreNamespaces">
+            <summary>
+            Initializes the namespaces node type option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignorePrefixes">
+            <summary>
+            Initializes the xml prefixes option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreXmlDecl">
+            <summary>
+            Initializes the declaration node type option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.ignoreDtd">
+            <summary>
+            Initializes the DTD node type option
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.loadState">
+            <summary>
+            Declares an object with references to the last
+            node and attribute.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.Load(System.Xml.XmlTextReader,System.Xml.XmlReader)">
+            <summary>
+            Loads the diffgram to an XmlDocument object, and drives the 
+            process of loading the baseline xml file to a 
+            XmlDiffViewDocument object, tagging the nodes and attributes
+            according to the options selected, and finally merges the
+            diffgram data into the XmlDiffViewDocument object. 
+            </summary>
+            <param name="sourceXml">baseline data</param>
+            <param name="diffGram">diffgram data stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesAsFormattedText(System.String,System.String,System.String,System.Boolean,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Write the differences in the Xml data 
+            to the output file as formatted xml-like text.
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="outputTextPath">Output data file for the data in text form</param>
+            <param name="appendToOutputFile">Append output to the file</param>
+            <param name="fragment">This is an xml data frament</param>
+            <param name="options">Comparison options</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesAsFormattedText(System.String,System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Append the differences in the Xml data 
+            to the output file as formatted xml-like text.
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="outputTextPath">output file for the data in text form</param>
+            <param name="fragment">This is an xml data frament</param>
+            <param name="options">Comparison options</param>
+            <returns>Differences were not found.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesAsFormattedText(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Write the differences in the Xml data 
+            as formatted xml-like text return in
+            a memory based TextReader object.
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="fragment">This is an xml data frament</param>
+            <param name="options">Comparison options</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesSideBySideAsHtml(System.String,System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Create WinDiff like static comparison in Html.
+            </summary>
+            <param name="sourceXmlFile">the baseline file</param>
+            <param name="changedXmlFile">the actual (or target) file</param>
+            <param name="resultHtmlViewFile">the html output file</param>
+            <param name="fragment">the file is only an Xml fragment</param>
+            <param name="options">comparison filtering options</param>
+            <returns>Differences were not found after filtering.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesSideBySideAsHtml(System.String,System.String,System.String,System.Boolean,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Create WinDiff like static comparison in Html.
+            </summary>
+            <param name="sourceXmlFile">the baseline file</param>
+            <param name="changedXmlFile">the actual (or target) file</param>
+            <param name="resultHtmlViewFile">the html output file</param>
+            <param name="fragment">the file is only an Xml fragment</param>
+            <param name="appendToOutputFile">Append to existing output file</param>
+            <param name="options">comparison filtering options</param>
+            <returns>Differences were not found after filtering.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesSideBySideAsHtml(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Create WinDiff like static comparison in Html.
+            </summary>
+            <param name="sourceXmlFile">the baseline file</param>
+            <param name="changedXmlFile">the actual (or target) file</param>
+            <param name="fragment">the file is only an Xml fragment</param>
+            <param name="options">comparison filtering options</param>
+            <returns>Differences were not found after filtering.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GetHtml(System.IO.TextWriter)">
+            <summary>
+            Converts a copy of the xml data in the 
+            XmlDiffViewDocument object
+            to html and writes it out to the 
+            TextWriter object (which may be a file).
+            </summary>
+            <param name="htmlOutput">Data stream for output</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlWriteString(System.Xml.XmlWriter,System.String)">
+            <summary>
+            Writes to the specified section
+            </summary>
+            <param name="pane">baseline/actual data presentation sections</param>
+            <param name="str">Statement to be written</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlWriteString(System.Xml.XmlWriter,Microsoft.XmlDiffPatch.XmlDiffViewOperation,System.String)">
+            <summary>
+            Writes to the specified section using
+            highlighting based on hte type of data change
+            </summary>
+            <param name="pane">baseline/actual data presentation sections</param>
+            <param name="op">Type of data change</param>
+            <param name="str">Statement to be written</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlWriteEmptyString(System.Xml.XmlWriter)">
+            <summary>
+            Writes an 'empty' space character.
+            </summary>
+            <param name="pane">baseline/actual data presentation sections</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlStartCell(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Writes the start of a table cell
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">Text indentation characters</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlEndCell(System.Xml.XmlWriter)">
+            <summary>
+            Writes the closing tags
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlBr(System.Xml.XmlWriter)">
+            <summary>
+            Inserts an html break-line and writes the tags to 
+            close the html element
+            </summary>
+            <param name="writer">Output data stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlStartRow(System.Xml.XmlWriter)">
+            <summary>
+            Starts a new row in the table
+            </summary>
+            <param name="writer">output data stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlEndRow(System.Xml.XmlWriter)">
+            <summary>
+            Ends a row in the table
+            </summary>
+            <param name="writer">output data stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GetIndent(System.Int32)">
+            <summary>
+            Gets 'empty' string characters to use as an 
+            indentation for formatting the output.
+            </summary>
+            <param name="charCount">Number of indentations</param>
+            <returns>string to use as an indentation</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.IndentText(System.Int32)">
+            <summary>
+            This functions allows the size of the indentation to be
+            set, and returns one indentation.
+            </summary>
+            <param name="charCount">Size of the indent (spaces)</param>
+            <returns>A string of spaces</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.NormalizeText(System.String)">
+            <summary>
+            Adjusts the format of the data to account for the defined
+            whitespace characters.
+            </summary>
+            <param name="text">data to be formatted</param>
+            <returns>formatted data</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.IsWhitespace(System.Char)">
+            <summary>
+            Determines if the specifed character is a 
+            defined whitespace character.
+            </summary>
+            <param name="c">character to test</param>
+            <returns>specifed character is a 
+            defined whitespace character</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlSetColor(System.Xml.XmlWriter,Microsoft.XmlDiffPatch.XmlDiffViewOperation)">
+            <summary>
+            Sets the output style based on the type of change in the data. 
+            </summary>
+            <param name="pane">baseline/actual data presentation sections</param>
+            <param name="op">Type of data change</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.HtmlResetColor(System.Xml.XmlWriter)">
+            <summary>
+            Closes the tags after setting the color
+            </summary>
+            <param name="pane">baseline/actual data presentation sections</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.ParseOptions(System.String)">
+            <!-- Failed to insert some or all of included XML --><include file="doc\XmlDiff.uex" path="docs/doc[@for=&quot;XmlDiff.ParseOptions&quot;]/*" />
+            <summary>
+               Translates string representation of XmlDiff options into XmlDiffOptions enum.
+            </summary>
+            <param name="options">Value of the 'options' attribute of the 'xd:xmldiff' element in diffgram.</param>
+            <returns>An object containing the parsing options.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GetDifferencesAsFormattedText(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Determines if the data changed
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="fragment">xml data fragment</param>
+            <param name="options">Comparison options</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.DifferencesSideBySideAsHtml(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions,System.IO.TextWriter)">
+            <summary>
+            Determines if the data changed
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="fragment">xml data fragment</param>
+            <param name="options">Comparison options</param>
+            <param name="resultHtml">output data</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.MarkupBaselineWithChanges(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Markup the baseline data with changes
+            </summary>
+            <param name="sourceXmlFile">baseline xml data</param>
+            <param name="changedXmlFile">xml data to which to compare</param>
+            <param name="fragment">xml data fragment</param>
+            <param name="options">comparison options</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.PreprocessDiffgram(System.Xml.XmlDocument)">
+            <summary>
+            Adjust the diffgram data for the comparison options. 
+            </summary>
+            <param name="diffgramDoc">diffgram data</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.LoadSourceChildNodes(Microsoft.XmlDiffPatch.XmlDiffViewParentNode,System.Xml.XmlTextReader,System.Boolean)">
+            <summary>
+            Recurses through the baseline document loading the
+            contents to the XmlDiffViewDocument object and tagging
+            the pieces to be ignored later when the data is output.
+            </summary>
+            <param name="parent">Parent node</param>
+            <param name="reader">The xml data</param>
+            <param name="emptyElement">Node has no children</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.ApplyDiffgram(System.Xml.XmlNode,Microsoft.XmlDiffPatch.XmlDiffViewParentNode)">
+            <summary>
+            Loops through the child nodes of the diffgram and
+            annotates the nodes with the type of operation, e.g., 
+            add, change, remove, etc.
+            </summary>
+            <param name="diffgramParent">node in diffgram data</param>
+            <param name="sourceParent">node in baseline data</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.OnRemove(System.Xml.XmlElement,Microsoft.XmlDiffPatch.XmlDiffPathNodeList,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewNode@)">
+            <summary>
+            Tag the relocated data 
+            </summary>
+            <param name="diffgramElement">node in diffgram</param>
+            <param name="matchNodes">the path to the baseline node</param>
+            <param name="sourceParent">the baseline parent node</param>
+            <param name="currentPosition">the resulting node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.OnAddMatch(System.Xml.XmlElement,Microsoft.XmlDiffPatch.XmlDiffPathNodeList,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewNode@)">
+            <summary>
+            Relocate matched data. 
+            </summary>
+            <param name="diffgramElement">node in diffgram</param>
+            <param name="matchNodes">the path to the baseline node</param>
+            <param name="sourceParent">the baseline parent node</param>
+            <param name="currentPosition">the resulting node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.OnAddNode(System.Xml.XmlElement,System.String,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewNode@)">
+            <summary>
+            Add the new node or attribute 
+            </summary>
+            <param name="diffgramElement">node in diffgram</param>
+            <param name="nodeTypeAttr">Whether this is an Attribute</param>
+            <param name="sourceParent">the baseline parent node</param>
+            <param name="currentPosition">the resulting node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.OnAddFragment(System.Xml.XmlElement,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewNode@)">
+            <summary>
+            Add the new fragment 
+            </summary>
+            <param name="diffgramElement">node in diffgram</param>
+            <param name="sourceParent">the baseline parent node</param>
+            <param name="currentPosition">the resulting node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.ImportNode(System.Xml.XmlNode)">
+            <summary>
+            Generate a new node
+            </summary>
+            <param name="node">node to clone</param>
+            <returns>the new node</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.OnChange(System.Xml.XmlElement,Microsoft.XmlDiffPatch.XmlDiffPathNodeList,Microsoft.XmlDiffPatch.XmlDiffViewParentNode,Microsoft.XmlDiffPatch.XmlDiffViewNode@)">
+            <summary>
+            Store changes in the ChangeInfo object of the marked-up-baseline node
+            </summary>
+            <param name="diffgramElement">current element in the diffgram</param>
+            <param name="matchNodes">Object containing the list of baseline nodes
+             which match the position in the diffgram</param>
+            <param name="sourceParent">parent node in the baseline data</param>
+            <param name="currentPosition">current position</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GetDescriptor(System.Int32)">
+            <summary>
+            Gets a reference to the operation description object
+            for the operation identification number provided.
+            </summary>
+            <param name="opid">operation identification number</param>
+            <returns>A reference to the operation description object</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.AnnotateNode(Microsoft.XmlDiffPatch.XmlDiffViewNode,Microsoft.XmlDiffPatch.XmlDiffViewOperation,System.Int32,System.Boolean)">
+            <summary>
+            Mark the nodes (and attributes) with the type of data change
+            </summary>
+            <param name="node">the node to annotate</param>
+            <param name="op">the type of data change</param>
+            <param name="opid">the operation identification number</param>
+            <param name="subtree">the node's subtree</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GetText(System.String,System.String)">
+            <summary>
+            initialise the output with differences node and
+            start the process of formatting the output
+            </summary>
+            <param name="baselineFile">baseline file name</param>
+            <param name="actualFile">actual file name</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.GenerateDiffGram(System.String,System.String,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+            Compare the xml data files
+            </summary>
+            <param name="sourceXmlFile">baseline file</param>
+            <param name="changedXmlFile">actual file</param>
+            <param name="fragment">xml data fragment</param>
+            <param name="options">comparison options</param>
+            <returns>data is identical</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.SideBySideHtmlHeader(System.String,System.String,System.Boolean,System.IO.TextWriter)">
+            <summary>
+            The generic html header.
+            </summary>
+            <param name="sourceXmlFile">baseline xml data</param>
+            <param name="changedXmlFile">xml data to which to compare</param>
+            <param name="identicalData">Data is identical</param>
+            <param name="resultHtml">Output file</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.MergeDiffgramAndBaseline(System.String,System.Boolean)">
+            <summary>
+            Merge the diffgram and the baseline file 
+            into a new XmlDiffViewDocument object.
+            </summary>
+            <param name="sourceXmlFile">the baseline file</param>
+            <param name="fragment">the file is an Xml fragment</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.SideBySideHtmlFooter(System.IO.TextWriter)">
+            <summary>
+            html footer
+            </summary>
+            <param name="resultHtml">output stream</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffView.LoadState">
+            <summary>
+            An object used when loading to provide 
+            references to the last node and attribute.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.LoadState.lastChild">
+            <summary>
+            Declares a reference to the last child node processed
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffView.LoadState.lastAttribute">
+            <summary>
+            Declares a reference to the last attribute processed
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffView.LoadState.LastChild">
+            <summary>
+            Gets or sets a reference to the last child node processed
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffView.LoadState.LastAttribute">
+            <summary>
+            Gets or sets a reference to the last attribute processed
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffView.LoadState.Reset">
+            <summary>
+            Clear the references the last 
+            child node and attribute processed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewAttribute">
+            <summary>
+            Class the manage the output for viewing xml attributes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.prefix">
+            <summary>
+            Declares a variation to store the
+            xml prefix value (without the colon).
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.localName">
+            <summary>
+            Declares a variation to store the node's localName
+            (the name without the prefix).
+            </summary>
+            <remarks>prefix + ":" + localName = name;</remarks>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.name">
+            <summary>
+            Declares a variation to store the node's full name.
+            </summary>
+            <remarks>the localName with the prefix and colon separator</remarks>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.namespaceUri">
+            <summary>
+            Declares a variation to store the
+            xml namespaceUri value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.attributeValue">
+            <summary>
+            Declares a variation to store the
+            xml attribute value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Alternative constructor
+            </summary>
+            <param name="localName">Attribute name without prefix</param>
+            <param name="prefix">Attribute prefix</param>
+            <param name="ns">Namespace URI</param>
+            <param name="name">Attribute name including prefix</param>
+            <param name="attributeValue">the attribute's value</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="localName">Attribute name without prefix</param>
+            <param name="prefix">Attribute prefix</param>
+            <param name="ns">Namespace URI</param>
+            <param name="attributeValue">the attribute's value</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.AttributeValue">
+            <summary>
+            Gets or sets the attribute's value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.Prefix">
+            <summary>
+            Gets or sets the xml node prefix (without the semi-colon) 
+            </summary>
+            <example>xls</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.Name">
+            <summary>
+            Gets or sets the node name with, if present,
+            a prefix
+            </summary>
+            <example>xls:mynode</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.LocalName">
+            <summary>
+            Gets or sets the node name without a prefix.
+            </summary>
+            <example>mynode</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.NamespaceUri">
+            <summary>
+            Gets or sets the namespace Uniform 
+            Resource Identifier (URI).
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.OuterXml">
+            <summary>
+            Returns the string representing the attribute name
+            and its value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.Clone(System.Boolean)">
+            <summary>
+            Gets a complete copy of the current attribute.
+            </summary>
+            <param name="deep">deprecated</param>
+            <returns>an attribute object</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Override for the method to add this node's data 
+            to the output stream. This method should never 
+            be called from this object.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">size of indent</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Override for the method to add this node's data 
+            in text form to the output stream. This method 
+            should never be called from this object.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">size of indent</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.DrawHtmlAttribute(System.Xml.XmlWriter,System.Boolean,Microsoft.XmlDiffPatch.XmlDiffViewOperation)">
+            <summary>
+            Generate html output data for a differences 
+            due to a change in an attribute.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="ignorePrefixes">Whether to ignore xml prefixes</param>
+            <param name="typeOfDifference">type of difference</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewAttribute.DrawHtmlAttributeChange(System.Xml.XmlWriter,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Generates output data in html for a difference due
+            to changing attribute data.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="localName">name of attribute 
+            (without the prefix)</param>
+            <param name="prefix">xml attribute prefix</param>
+            <param name="attributeValue">The value for the attribute.</param>
+            <param name="ignorePrefixes">Whether to ignore prefixes.</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewCharData">
+            <summary>
+            Class to generate output data for character 
+            based data, e.g., text, CharData, and comments.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewCharData.innerText">
+            <summary>
+            Hold the value of the innerText for the node.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.#ctor(System.String,System.Xml.XmlNodeType)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="value">innerText for this node</param>
+            <param name="nodeType">type of node</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewCharData.InnerText">
+            <summary>
+            Gets or sets the inner text value.  Text returned 
+            is free of tabs and newline characters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewCharData.OuterXml">
+            <summary>
+            Returns innerText of current node.
+            </summary>
+            <value>innerText stripped of tabs and newline characters.</value>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">this parameter is deprecated</param>
+            <returns>a node object of type XmlDiffViewCharData</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates  output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.SetOpeningAndClosingTags(System.Xml.XmlNodeType)">
+            <summary>
+            Set xml tags based on the type of object.
+            </summary>
+            <param name="nodeType">The type of xml node.</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawTextAdd(System.IO.TextWriter)">
+            <summary>
+            Generates output text when the difference is due to adding data
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawTextDelete(System.IO.TextWriter)">
+            <summary>
+            Generates output text when the difference is due to deleting data
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawTextChange(System.IO.TextWriter)">
+            <summary>
+            Generates output text when the difference
+             is due to changing existing data
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawTextMoveFrom(System.IO.TextWriter)">
+            <summary>
+            Generates output text when the difference is 
+            due to moving data from a location.
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewCharData.DrawTextMoveTo(System.IO.TextWriter)">
+            <summary>
+            Generates output text when the difference is 
+            due to moving data to a location.
+            </summary>
+            <param name="writer">output stream</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewDocument">
+            <summary>
+            Class the generate output data for the document
+            level nodes and their children. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocument.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocument.OuterXml">
+            <summary>
+            Returns an Exception "OuterXml is not supported on 
+            XmlDiffViewElement."
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocument.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">deprecated</param>
+            <returns>Exception: Clone method should never be called on a document node.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocument.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocument.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates  output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType">
+            <summary>
+            Class to generate output data for differences in 
+            the DOCTYPE declaration (DTD) nodes.
+            </summary>
+            <remarks>Programmer notes for future code 
+             enhancements: The PublicLiteral 
+             and the SystemLiteral are considered attributes. 
+             The attribute names are PUBLIC and SYSTEM. 
+             To retrieve the content of the attribute, use 
+             GetAttribute or another attribute accessing 
+             method.</remarks>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.nameStore">
+            <summary>
+            Name given to the DOCTYPE declaration (DTD).
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">declaration name</param>
+            <param name="publicId">value of the PUBLIC  declaration 'attribute'</param>
+            <param name="systemId">value of the SYSTEM declaration 'attribute'</param>
+            <param name="documentTypeSubset">The inner declaration data</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.SystemId">
+            <summary>
+            Gets and sets the value of the SYSTEM declaration 'attribute'
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.Name">
+            <summary>
+            Gets and sets the declaration name
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.PublicId">
+            <summary>
+            Gets and sets the value of the PUBLIC declaration 'attribute'
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.Subset">
+            <summary>
+            Gets and sets the inner data for the declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.OuterXml">
+            <summary>
+            Returns the complete declaration 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">deprecated</param>
+            <returns>Exception: Clone method should 
+            never be called on a document type 
+            node.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Add the DocumentType data to the output. 
+            </summary>
+            <param name="writer">Output data stream</param>
+            <param name="indent">current size of text indentation</param>
+            <remarks>If the DOCTYPE declaration includes
+            declarations that are to be combined with 
+            external files or the external subset, it 
+            uses the following syntax.
+              DOCTYPE rootElement SYSTEM "URIreference"
+                [declarations]
+              or 
+            DOCTYPE rootElement PUBLIC "PublicIdentifier" "URIreference"
+            [declarations]
+            </remarks>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DocumentTypeSudoAttributes">
+            <summary>
+            Generates the original document type sudo-attribute
+            </summary>
+            <returns>document type sudo-attribute</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextAdd(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to adding data
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextMoveFrom(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to moving data from a location
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextMoveTo(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to moving data to a new location
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextRemove(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to removing data
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextChange(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to changing data
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewDocumentType.DrawTextNoChange(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form for differences
+            due to changing existing data
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewElement">
+            <summary>
+            Class to generate output for xml elements.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="localName">Element node name</param>
+            <param name="prefix">xml node prefix</param>
+            <param name="namespaceUri">Uniform Resource Identifier (URI)
+            </param>
+            <param name="ignorePrefix">Ignore differences in the prefix</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.Attributes">
+            <summary>
+            Gets or sets an attributes object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.OuterXml">
+            <summary>
+            Returns and exception("OuterXml is not 
+            supported on XmlDiffViewElement.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.LocalName">
+            <summary>
+            Gets or sets the name of the element without the prefix.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.Prefix">
+            <summary>
+            Gets or sets the prefix.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.NamespaceUri">
+            <summary>
+            Gets or sets the namespace Uniform Resource Identifier (URI)
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewElement.Name">
+            <summary>
+            Gets or set the name of the element with the prefix.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.GetAttribute(System.String)">
+            <summary>
+            Gets an attribute object for the specified attribute name.
+            </summary>
+            <param name="name">attribute name</param>
+            <returns>an attribute object</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.InsertAttributeAfter(Microsoft.XmlDiffPatch.XmlDiffViewAttribute,Microsoft.XmlDiffPatch.XmlDiffViewAttribute)">
+            <summary>
+            Inserts an attribute object after the specified attribute object.
+            </summary>
+            <param name="newAttr">the attribute object to insert</param>
+            <param name="refAttr">attribute object to insert after</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">has child nodes</param>
+            <returns>A copy of the current node</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates  output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawHtmlAttributes(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates attributes' output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="paneNo">Pane number, indicating
+             the left (baseline) or right side (actual) of the 
+             display</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextAttributes(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates atrributes' output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawHtmlNameChange(System.Xml.XmlWriter,System.String,System.String)">
+            <summary>
+            Generates output data in html form for a difference due to
+            a change in element name.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="localName">name of the 
+            element (without the prefix)</param>
+            <param name="prefix">prefix</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextNameAdd(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to adding data.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextNameDelete(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to deleting data.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextNameChange(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to changing existing data.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextNameMoveFrom(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to moving data from a location.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextNameMoveTo(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to moving data to a new location.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawHtmlName(System.Xml.XmlWriter,Microsoft.XmlDiffPatch.XmlDiffViewOperation,System.String,System.String)">
+            <summary>
+            Generates output data in text form for a difference due
+            to adding data.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="typeOfDifference">type of difference</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextName(System.IO.TextWriter,System.Int32,System.String,System.String)">
+            <summary>
+            Generates output data in text form for the name of the element.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+            <param name="tagStart">xml tags at start of statement</param>
+            <param name="tagEnd">xml tags at end of statement</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextAttributeChange(System.IO.TextWriter,Microsoft.XmlDiffPatch.XmlDiffViewAttribute)">
+            <summary>
+            Generate text output data for a differences 
+            due to a change, which may or may not have been 
+            a change in the attribute.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="attr">Attribute object</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewElement.DrawTextAttribute(System.IO.TextWriter,Microsoft.XmlDiffPatch.XmlDiffViewAttribute)">
+            <summary>
+            Generate text output data for an unchanged attribute.
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="attr">attribute object</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewER">
+            <summary>
+            Class to generate outout data for the EntityReference type nodes 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewER.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">name of the node</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewER.OuterXml">
+            <summary>
+            Gets the name of the ER node with special characters
+            </summary>
+            <value>{this value is not used}</value>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewER.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">{deprecated}</param>
+            <returns>a node object</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewER.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates output data in html form.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewER.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewNode">
+            <summary>
+            Class to generate output data for the nodes
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.changeInfo">
+            <summary>
+            a place to store change information 
+            (only if Operation == XmlDiffViewOperation.Change)
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.nodeTypeStore">
+            <summary>
+            stores the node type value
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.nextSibilingStore">
+            <summary>
+            Pointer to the next sibiling
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.previousSibilingStore">
+            <summary>
+            Pointer to the previous sibling or null if there isn't one.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.parentStore">
+            <summary>
+            Pointer to the parent node
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.operation">
+            <summary>
+            The type of difference
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.operationId">
+            <summary>
+            Identification number for the difference
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.#ctor(System.Xml.XmlNodeType)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="nodeType">type of node</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.OuterXml">
+            <summary>
+            Abstract property to get the outer xml data
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInformation">
+            <summary>
+            Gets or sets an object contained changed data.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.NextSibling">
+            <summary>
+            Gets or sets the next sibling
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.PreviousSibling">
+            <summary>
+            Gets or sets the previous sibling
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.Parent">
+            <summary>
+            Gets or sets the parent node
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.LineNumber">
+            <summary>
+            Gets or sets the line number
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.EndLine">
+            <summary>
+            Get or set the end line number for elements with children.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.NodeType">
+            <summary>
+            Gets or sets the type of node
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.Operation">
+            <summary>
+            Gets or sets the type of difference.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.OperationId">
+            <summary>
+            Gets or sets the difference identifier number
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.FirstChildNode">
+            <summary>
+            Gets a null value
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.DrawTextNoChange(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generate output text for a difference due to a change 
+            to the baseline data.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of the indent</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.Clone(System.Boolean)">
+            <summary>
+            Abstract method to get a copy of a node
+            </summary>
+            <param name="deep">has children</param>
+            <returns>a node object</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Abstract method to generate html output data
+            </summary>
+            <param name="writer">data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Abstract method to generate text output data
+            </summary>
+            <param name="writer">data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.DrawHtmlNoChange(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates output data in html form when the node has not changed
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.OutputNavigationHtml(System.Xml.XmlWriter)">
+            <summary>
+            Adds bookmarks and links to navigate from and to the moved items
+            </summary>
+            <param name="writer">The output writer object</param>
+            <returns>A closing 'A' element is needed</returns>
+            <remarks>When this returns 'true' use the 'WriteEndElement' 
+            method later in the calling funtions to write the closing 'A' tag.</remarks>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewNode.RemoveTabsAndNewlines(System.String)">
+            <summary>
+            Strips the provided text of tabs and newline characters  
+            </summary>
+            <param name="innerText">text from which to remove 
+            the special characters</param>
+            <returns>the statement after the special characters
+            have been removed</returns>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo">
+            <summary>
+            Class to hold values of the changed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.localName">
+            <summary>
+            Name of the node without the prefix
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.prefix">
+            <summary>
+            Prefix for the node except for a DocumentType
+            node this holds the "attribute" value for the 'PUBLIC' "attribute".
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.namespaceUri">
+            <summary>
+            URI for the node except for a DocumentType
+            node this holds the "attribute" value for the 'SYSTEM' "attribute".
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.subset">
+            <summary>
+            internal subset for a DocumentType node
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.Prefix">
+            <summary>
+            Gets or sets the xml node prefix (without the semi-colon) 
+            </summary>
+            <example>xls</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.Subset">
+            <summary>
+            Gets or sets the node name with, if present,
+            a prefix
+            </summary>
+            <example>xls:mynode</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.LocalName">
+            <summary>
+            Gets or sets the node name without a prefix.
+            </summary>
+            <example>mynode</example>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewNode.ChangeInfo.NamespaceUri">
+            <summary>
+            Gets or sets the namespace Uniform 
+            Resource Identifier (URI).
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewParentNode">
+            <summary>
+            Class to access the parent node object and its child node objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.#ctor(System.Xml.XmlNodeType)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="nodeType">Type of xml node</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.ChildNodes">
+            <summary>
+            Gets or sets a reference to the childnodes
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.SourceChildNodesCount">
+            <summary>
+            Gets or sets the number of child nodes
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.FirstChildNode">
+            <summary>
+            Gets the first child node
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.SourceChildNodesIndex">
+            <summary>
+            Gets or sets the collection of baseline child nodes
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.GetSourceChildNode(System.Int32)">
+            <summary>
+            Gets a particular child node based on its index.
+            </summary>
+            <param name="index">index of the child node</param>
+            <returns>child node</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the
+            index value is out of bounds (Has the CreateSourceNodesIndex
+             method been called?)</exception>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.CreateSourceNodesIndex">
+            <summary>
+            Creates an indexed collection of child nodes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.InsertChildAfter(Microsoft.XmlDiffPatch.XmlDiffViewNode,Microsoft.XmlDiffPatch.XmlDiffViewNode,System.Boolean)">
+            <summary>
+            Inserts a node after the specified node
+            </summary>
+            <param name="newChild">node to insert</param>
+            <param name="referenceChild">node to insert after</param>
+            <param name="sourceNode">This is a baseline node</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.HtmlDrawChildNodes(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewParentNode.TextDrawChildNodes(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewPI">
+            <summary>
+            Class to generate output data for programming instruction nodes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewPI.name">
+            <summary>
+            Name of the programing instruction.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewPI.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">name of programming instruction</param>
+            <param name="value">value of programming instruction</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewPI.Name">
+            <summary>
+            Name of the programming instruction.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewPI.OuterXml">
+            <summary>
+            Gets or sets the programming instruction statement
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewPI.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">deprecated</param>
+            <returns>a programming instruction node</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewPI.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates output data in html form.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewPI.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data in text form.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewPI.DrawAttributes(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates output data for attributes in text form.
+            </summary>
+            <param name="writer">output data stream</param>
+            <param name="indent">size of indentation</param>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewResults">
+            -----------------------------------------------------------------------------
+            <summary>
+            Class to provide access the results.
+            </summary>
+            <history>
+            	[barryw] 31MAR05 Created again.
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewResults.reader">
+            <summary>
+            Holds the comparison data locally.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffViewResults.identicalData">
+            <summary>
+            Holds the value which indicates the 
+            baseline and actual data are identical.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.#ctor(System.IO.MemoryStream,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="data">detailed results of the comparison</param>
+            <param name="identical">summary result if the 
+            comparison, value is 'true' if there were no 
+            differences found.</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewResults.Identical">
+            <summary>
+            Gets the value which indicates whether differences were found.
+            </summary>
+            <value>the xml data are identical.</value>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.Peek">
+            <summary>Reads the next character without changing the state of the reader or the character source. Returns the next available character without actually reading it from the input stream.</summary>
+            <returns>The next character to be read, or -1 if no more characters are available or the stream does not support seeking.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.Read(System.Char[],System.Int32,System.Int32)">
+            <summary>Reads a maximum of count characters from the current
+            stream and writes the data to buffer, beginning at index.
+            </summary>
+            <returns>The number of characters that have been read. The number
+            will be less than or equal to count, depending on whether the 
+            data is available within the stream. This method returns zero if 
+            called when no more characters are left to read.</returns>
+            <param name="count">The maximum number of characters to read. If 
+            the end of the stream is reached before count of characters is 
+            read into buffer, the current method returns. </param>
+            <param name="buffer">When this method returns, contains the 
+            specified character array with the values between index and 
+            (index + count - 1) replaced by the characters read from the 
+            current source. </param>
+            <param name="index">The place in buffer at which to begin writing.
+            </param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.Read">
+            <summary>Reads the next character from the input stream and 
+            advances the character position by one character.</summary>
+            <returns>The next character from the input stream, or -1 if no 
+            more characters are available. The default implementation returns
+            -1.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.ReadBlock(System.Char[],System.Int32,System.Int32)">
+            <summary>Reads a maximum of count characters from the current 
+            stream and writes the data to buffer, beginning at index.</summary>
+            <returns>The number of characters that have been read. The number 
+            will be less than or equal to count, depending on whether all 
+            input characters have been read.</returns>
+            <param name="count">The maximum number of characters to read. 
+            </param>
+            <param name="buffer">When this method returns, this parameter 
+            contains the specified character array with the values between 
+            index and (index + count -1) replaced by the characters read from 
+            the current source. </param>
+            <param name="index">The place in buffer at which to begin writing.
+            </param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.ReadLine">
+            <summary>Reads a line of characters from the current stream and 
+            returns the data as a string.</summary>
+            <returns>The next line from the input stream, or null if all 
+            characters have been read.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.ReadToEnd">
+            <summary>Reads all characters from the current position to the 
+            end of the TextReader and returns them as one string.</summary>
+            <returns>A string containing all characters from the current 
+            position to the end of the TextReader.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewResults.PopulateReader(System.IO.MemoryStream@)">
+            <summary>
+            Returns the underlying populated basestream of a 
+            TextWriter objectdata as a TextReader object 
+            re-positioned to the beginning of the data stream.
+            </summary>
+            <param name="data">reference to the data in memory</param>
+            <returns>the Textreader object</returns>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration">
+            <summary>
+            Class to generate differences data for xml declaration nodes. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="value">the declaration's value</param>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration.OuterXml">
+            <summary>
+            Gets the declaration value enclosed within xml declaration tags.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration.Clone(System.Boolean)">
+            <summary>
+            Creates a complete copy of the current node.
+            </summary>
+            <param name="deep">deprecated</param>
+            <returns>a declaration node</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration.DrawHtml(System.Xml.XmlWriter,System.Int32)">
+            <summary>
+            Generates  output data in html form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffViewXmlDeclaration.DrawText(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Generates  output data in text form
+            </summary>
+            <param name="writer">output stream</param>
+            <param name="indent">number of indentations</param>
+        </member>
+    </members>
+</doc>

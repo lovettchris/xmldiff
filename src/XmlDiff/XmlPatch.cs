@@ -17,7 +17,6 @@ namespace Microsoft.XmlDiffPatch
 //////////////////////////////////////////////////////////////////
 // XmlPatch
 //
-/// <include file='doc\XmlPatch.uex' path='docs/doc[@for="XmlPatch"]/*' />
 /// <summary>
 ///    XML Patch modifies XML documents or nodes according to the XDL diffgram created by XML Diff.  
 /// </summary>
@@ -27,19 +26,20 @@ public class XmlPatch
     XmlNode _sourceRootNode;
     bool   _ignoreChildOrder;
 
-// Constructor
+    /// <summary>
+    /// Construct empty XmlPatch object.
+    /// </summary>
 	public XmlPatch()
 	{
 	}
 
 // Methods
-    /// <include file='doc\XmlPatch.uex' path='docs/doc[@for="XmlPatch.Patch1"]/*' />
     /// <summary>
     ///    Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
     ///    sourceDoc according to the changes described in the diffgram. 
     /// </summary>
     /// <param name="sourceDoc">The original xml document</param>
-    /// <param name="diffgramFileName">XmlReader for the XDL diffgram.</param>
+    /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
 	public void Patch( XmlDocument sourceDoc, XmlReader diffgram ) 
 	{
         if ( sourceDoc == null )
@@ -52,13 +52,13 @@ public class XmlPatch
         Debug.Assert( sourceNode == sourceDoc );
 	}
     
-    /// <include file='doc\XmlPatch.uex' path='docs/doc[@for="XmlPatch.Patch3"]/*' />
     /// <summary>
     ///    Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
     ///    sourceDoc according to the changes described in the diffgram. 
     /// </summary>
-    /// <param name="sourceDoc">The original xml document</param>
-    /// <param name="diffgramFileName">XmlReader for the XDL diffgram.</param>
+    /// <param name="sourceFile">The original xml document</param>
+    /// <param name="outputStream">The output stream to write results to</param>
+    /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
 	public void Patch( string sourceFile, Stream outputStream, XmlReader diffgram ) 
 	{
         if ( sourceFile == null )
@@ -89,13 +89,13 @@ public class XmlPatch
         }
 	}
 
-    /// <include file='doc\XmlPatch.uex' path='docs/doc[@for="XmlPatch.Patch3"]/*' />
     /// <summary>
     ///    Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
     ///    sourceDoc according to the changes described in the diffgram. 
     /// </summary>
-    /// <param name="sourceDoc">The original xml document</param>
-    /// <param name="diffgramFileName">XmlReader for the XDL diffgram.</param>
+    /// <param name="sourceReader">The original xml document</param>
+    /// <param name="outputStream">The output stream to write results to.</param>
+    /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
     public void Patch( XmlReader sourceReader, Stream outputStream, XmlReader diffgram ) {
         if ( sourceReader == null )
             throw new ArgumentNullException( "sourceReader" );
@@ -175,13 +175,12 @@ public class XmlPatch
     }
 
 
-    /// <include file='doc\XmlPatch.uex' path='docs/doc[@for="XmlPatch.Patch2"]/*' />
     /// <summary>
     ///    Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
     ///    sourceDoc according to the changes described in the diffgram. 
     /// </summary>
-    /// <param name="sourceDoc">The original xml node</param>
-    /// <param name="diffgramFileName">XmlReader for the XDL diffgram.</param>
+    /// <param name="sourceNode">The original xml node</param>
+    /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
     public void Patch( ref XmlNode sourceNode, XmlReader diffgram )
     {
         if ( sourceNode == null )

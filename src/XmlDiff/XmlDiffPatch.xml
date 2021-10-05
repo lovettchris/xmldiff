@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XmlDiffPatch</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffPerf">
+            <summary>
+            Class for tracking performance results.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiffPerf.TotalTime">
+            <summary>
+            Total time measured.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiffPerf.Clean">
+            <summary>
+            Reset the counters.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffOptions">
+            <summary>
+            Options for comparing XML documents. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.None">
+            <summary>
+            No special options.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder">
+            <summary>
+            Ignore order of children when comparing them.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreComments">
+            <summary>
+            Ignore comments entirely.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePI">
+            <summary>
+            Ignore processing instructions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreWhitespace">
+            <summary>
+            Ignore all insignificant whitespace.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreNamespaces">
+            <summary>
+            Ignore the namespace qualified part of any XML names.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes">
+            <summary>
+            Ignore the specific namespace prefixes chosen, but compare the namespare URI's instead.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreXmlDecl">
+            <summary>
+            Ignore any XML declarations.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreDtd">
+            <summary>
+            Ignore the DOCTYPE tag and any DTD contents therein.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiffAlgorithm">
+            <summary>
+            Types of algorithms that can be used for comparing XML documents by XmlDiff. Auto means XmlDiff will
+            automatically decide which algorithm to use for the particular case depending on the assumed number 
+            of changes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffAlgorithm.Auto">
+            <summary>
+            Automatically decide which algorithm to use.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffAlgorithm.Fast">
+            <summary>
+            Favor the fastest algorithm.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiffAlgorithm.Precise">
+            <summary>
+            Favor accuracy of the diff.
+            </summary>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlDiff">
+            <summary>
+            Compares two documents or fragments. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.#ctor">
+            <summary>
+               Constructs XmlDiff object with default options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.#ctor(Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+               Constructs XmlDiff object with the given options. The values of XmlDiffOptions
+               may be combined using the operator '|'.
+            </summary>
+        </member>
+        <member name="F:Microsoft.XmlDiffPatch.XmlDiff.NamespaceUri">
+            <summary>
+               XmlDiff namespace. The diffgram nodes belongs to this namespace.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreChildOrder">
+            <summary>
+               If true, the order of child nodes of each element will be ignored when comparing 
+               the documents/fragments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreComments">
+            <summary>
+               If true, all comments in the compared documents/fragments will be ignored.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnorePI">
+            <summary>
+               If true, all processing instructions in the compared documents/fragments will be ignored.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreWhitespace">
+            <summary>
+               If true, all whitespace nodes in the compared documents/fragments will be ignored. Also, all
+               text nodes and values of attributes will be normalized; whitespace sequences will be replaced
+               by single space and beginning and trailing whitespaces will be trimmed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreNamespaces">
+            <summary>
+               If true, the namespaces will be ignored when comparing the names of elements and attributes.
+               This also mean that the prefixes will be ignored too as if the IgnorePrefixes option is true.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnorePrefixes">
+            <summary>
+               If true, the prefixes will be ignored when comparing the names of elements and attributes. 
+               The namespaces will not ne ignored unless IgnoreNamespaces flag is true.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreXmlDecl">
+            <summary>
+               If true, the xml declarations will not be compared.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.IgnoreDtd">
+            <summary>
+               If true, the xml declarations will not be compared.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.Options">
+            <summary>
+               Options used when comparing xml documents/fragments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.XmlDiffPatch.XmlDiff.Algorithm">
+            <summary>
+               Algorithm that will be used for XML comparison.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.String,System.String,System.Boolean)">
+            <summary>
+               Compares two XML documents or fragments.
+            </summary>
+            <param name="sourceFile">The original xml document or fragment filename</param>
+            <param name="changedFile">The changed xml document or fragment filename.</param>
+            <param name="bFragments">If true, the passed files contain xml fragments; otherwise the files must contain xml documents.</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.String,System.String,System.Boolean,System.Xml.XmlWriter)">
+            <summary>
+               Compares two XML documents or fragments. 
+               If the diffgramWriter parameter is not null it will contain the list of changes 
+               between the two XML documents/fragments (diffgram).
+            </summary>
+            <param name="sourceFile">The original xml document or fragment filename</param>
+            <param name="changedFile">The changed xml document or fragment filename.</param>
+            <param name="bFragments">If true, the passed files contain xml fragments; otherwise the files must contain xml documents.</param>
+            <param name="diffgramWriter">XmlWriter object for returning the list of changes (diffgram).</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.Xml.XmlReader,System.Xml.XmlReader)">
+            <summary>
+               Compares two XML documents or fragments.
+            </summary>
+            <param name="sourceReader">XmlReader representing the original xml document or fragment.</param>
+            <param name="changedReader">XmlReader representing the changed xml document or fragment.</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.Xml.XmlReader,System.Xml.XmlReader,System.Xml.XmlWriter)">
+            <summary>
+               Compares two XML documents or fragments.
+               If the diffgramWriter parameter is not null it will contain the list of changes 
+               between the two XML documents/fragments (diffgram).
+            </summary>
+            <param name="sourceReader">XmlReader representing the original xml document or fragment.</param>
+            <param name="changedReader">XmlReader representing the changed xml document or fragment.</param>
+            <param name="diffgramWriter">XmlWriter object for returning the list of changes (diffgram).</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.Xml.XmlNode,System.Xml.XmlNode)">
+            <summary>
+            Compares two XML nodes.  
+            </summary>
+            <param name="sourceNode">Original XML node</param>
+            <param name="changedNode">Changed XML node</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.Compare(System.Xml.XmlNode,System.Xml.XmlNode,System.Xml.XmlWriter)">
+            <summary>
+               Compares two XML nodes.
+               If the diffgramWriter parameter is not null it will contain the list of changes 
+               between the two XML documents/fragments (diffgram).
+            </summary>
+            <param name="sourceNode">Original XML node</param>
+            <param name="changedNode">Changed XML node</param>
+            <param name="diffgramWriter">XmlWriter object for returning the list of changes (diffgram).</param>
+            <returns>True, if the documents/fragments are identical.</returns>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.ParseOptions(System.String)">
+            <summary>
+               Translates string representation of XmlDiff options into XmlDiffOptions enum.
+            </summary>
+            <param name="options">Value of the 'options' attribute of the 'xd:xmldiff' element in diffgram.</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlDiff.VerifySource(System.Xml.XmlNode,System.UInt64,Microsoft.XmlDiffPatch.XmlDiffOptions)">
+            <summary>
+               Given a diffgram, this method verifies whether the given document/node is the original
+               source document/node for the diffgram. 
+            </summary>
+            <param name="node">Document/node to be verified.</param>
+            <param name="hashValue">Value of the 'srcDocHash' attribute of the 'xd:xmldiff' element in diffgram.
+            This is the hash value of the original source document. The document/node is verified if it yields
+            the same hash value.</param>
+            <param name="options">XmlDiff options selected when the document/node was compared. The hash value 
+            of the document/node depends on these options.</param>
+            <returns>True if the given document is the original source document for the diffgram.</returns>
+        </member>
+        <member name="T:Microsoft.XmlDiffPatch.XmlPatch">
+            <summary>
+               XML Patch modifies XML documents or nodes according to the XDL diffgram created by XML Diff.  
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlPatch.#ctor">
+            <summary>
+            Construct empty XmlPatch object.
+            </summary>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlPatch.Patch(System.Xml.XmlDocument,System.Xml.XmlReader)">
+            <summary>
+               Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
+               sourceDoc according to the changes described in the diffgram. 
+            </summary>
+            <param name="sourceDoc">The original xml document</param>
+            <param name="diffgram">XmlReader for the XDL diffgram.</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlPatch.Patch(System.String,System.IO.Stream,System.Xml.XmlReader)">
+            <summary>
+               Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
+               sourceDoc according to the changes described in the diffgram. 
+            </summary>
+            <param name="sourceFile">The original xml document</param>
+            <param name="outputStream">The output stream to write results to</param>
+            <param name="diffgram">XmlReader for the XDL diffgram.</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlPatch.Patch(System.Xml.XmlReader,System.IO.Stream,System.Xml.XmlReader)">
+            <summary>
+               Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
+               sourceDoc according to the changes described in the diffgram. 
+            </summary>
+            <param name="sourceReader">The original xml document</param>
+            <param name="outputStream">The output stream to write results to.</param>
+            <param name="diffgram">XmlReader for the XDL diffgram.</param>
+        </member>
+        <member name="M:Microsoft.XmlDiffPatch.XmlPatch.Patch(System.Xml.XmlNode@,System.Xml.XmlReader)">
+            <summary>
+               Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
+               sourceDoc according to the changes described in the diffgram. 
+            </summary>
+            <param name="sourceNode">The original xml node</param>
+            <param name="diffgram">XmlReader for the XDL diffgram.</param>
+        </member>
+    </members>
+</doc>
