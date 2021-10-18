@@ -272,12 +272,43 @@ namespace Microsoft.XmlDiffPatch
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private static bool HasDescendentChange(XmlDiffViewNode node, bool rootNode = true)
+        {
+            while (true)
+            {
+                if (node.Operation != XmlDiffViewOperation.Match)
+                {
+                    return true;
+                }
+
+                if (node.FirstChildNode != null && HasDescendentChange(node.FirstChildNode, false))
+                {
+                    return true;
+                }
+
+                if (node.NextSibling == null || rootNode)
+                {
+                    return false;
+                }
+
+                node = node.NextSibling;
+            }
+        }
+
+        /// <summary>
         /// Generates  output data in html form
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
         internal override void DrawHtml(XmlWriter writer, int indent)
         {
+            if (!HasDescendentChange(this))
+            {
+                return;
+            }
+
             XmlDiffViewOperation typeOfDifference = Operation;
             bool closeElement = false;
             XmlDiffView.HtmlStartRow(writer);
