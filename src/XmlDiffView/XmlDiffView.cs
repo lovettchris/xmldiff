@@ -636,6 +636,18 @@ namespace Microsoft.XmlDiffPatch
         }
 
         /// <summary>
+        /// Writes a block to represent one or more matched elements
+        /// </summary>
+        /// <param name="writer">Output data stream</param>
+        internal static void HtmlOmissionBlock(XmlWriter writer)
+        {
+            writer.WriteStartElement("tr");
+            writer.WriteAttributeString("class", "matchblock");
+            writer.WriteEndElement();
+        }
+
+
+        /// <summary>
         /// Starts a new row in the table
         /// </summary>
         /// <param name="writer">output data stream</param>

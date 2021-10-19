@@ -272,41 +272,25 @@ namespace Microsoft.XmlDiffPatch
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        private static bool HasDescendentChange(XmlDiffViewNode node, bool rootNode = true)
-        {
-            while (true)
-            {
-                if (node.Operation != XmlDiffViewOperation.Match)
-                {
-                    return true;
-                }
-
-                if (node.FirstChildNode != null && HasDescendentChange(node.FirstChildNode, false))
-                {
-                    return true;
-                }
-
-                if (node.NextSibling == null || rootNode)
-                {
-                    return false;
-                }
-
-                node = node.NextSibling;
-            }
-        }
-
-        /// <summary>
         /// Generates  output data in html form
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState)
+        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState)
         {
-            if (xmlDiffViewRenderState.OmitMatches && !HasDescendentChange(this))
+            if (renderState.OmitMatches)
             {
-                return;
+                if (IsDescendentAndSelfMatch(this))
+                {
+                    if (!renderState.InOmissionBlock)
+                    {
+                        XmlDiffView.HtmlOmissionBlock(writer);
+                        renderState.InOmissionBlock = true;
+                    }
+                    return;
+                }
+
+                renderState.InOmissionBlock = false;
             }
 
             XmlDiffViewOperation typeOfDifference = Operation;
@@ -389,7 +373,7 @@ namespace Microsoft.XmlDiffPatch
             // child nodes
             if (ChildNodes != null)
             {
-                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent, xmlDiffViewRenderState);
+                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent, renderState);
 
                 // end element
                 XmlDiffView.HtmlStartRow(writer);
@@ -444,6 +428,32 @@ namespace Microsoft.XmlDiffPatch
                     XmlDiffView.HtmlEndCell(writer);
                 }
                 XmlDiffView.HtmlEndRow(writer);
+            }
+        }
+
+        /// <summary>
+        /// Return true if node and all descendents are unchanged
+        /// </summary>
+        private static bool IsDescendentAndSelfMatch(XmlDiffViewNode node, bool rootNode = true)
+        {
+            while (true)
+            {
+                if (node.Operation != XmlDiffViewOperation.Match)
+                {
+                    return false;
+                }
+
+                if (node.FirstChildNode != null && !IsDescendentAndSelfMatch(node.FirstChildNode, false))
+                {
+                    return false;
+                }
+
+                if (node.NextSibling == null || rootNode)
+                {
+                    return true;
+                }
+
+                node = node.NextSibling;
             }
         }
 

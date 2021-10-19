@@ -249,7 +249,7 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="writer">output stream</param>
         /// <param name="indent">size of indent</param>
         [Obsolete("This method should never be called", true)]
-        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState)
+        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState)
         {
             throw new Exception("This method should never be called.");
         }
