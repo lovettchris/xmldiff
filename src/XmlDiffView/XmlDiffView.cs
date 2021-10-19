@@ -643,6 +643,9 @@ namespace Microsoft.XmlDiffPatch
         {
             writer.WriteStartElement("tr");
             writer.WriteAttributeString("class", "matchblock");
+            writer.WriteStartElement("td");
+            writer.WriteAttributeString("colspan", "3");
+            writer.WriteEndElement();
             writer.WriteEndElement();
         }
 
