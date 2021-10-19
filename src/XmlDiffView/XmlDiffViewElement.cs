@@ -302,9 +302,9 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal override void DrawHtml(XmlWriter writer, int indent)
+        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState)
         {
-            if (!HasDescendentChange(this))
+            if (xmlDiffViewRenderState.OmitMatches && !HasDescendentChange(this))
             {
                 return;
             }
@@ -389,7 +389,7 @@ namespace Microsoft.XmlDiffPatch
             // child nodes
             if (ChildNodes != null)
             {
-                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent);
+                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent, xmlDiffViewRenderState);
 
                 // end element
                 XmlDiffView.HtmlStartRow(writer);

@@ -251,7 +251,7 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">data stream</param>
         /// <param name="indent">size of indentation</param>
-        internal abstract void DrawHtml(XmlWriter writer, int indent);
+        internal abstract void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState);
 
         /// <summary>
         /// Abstract method to generate text output data

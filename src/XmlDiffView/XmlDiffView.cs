@@ -553,12 +553,12 @@ namespace Microsoft.XmlDiffPatch
         /// TextWriter object (which may be a file).
         /// </summary>
         /// <param name="htmlOutput">Data stream for output</param>
-        public void GetHtml(TextWriter htmlOutput)
+        public void GetHtml(TextWriter htmlOutput, bool omitMatches = false)
         {
             LastVisitedOpId = 0;
             XmlDiffViewNode.ResetLineNumbers();
             XmlTextWriter writer = new XmlTextWriter(htmlOutput);
-            this.viewDocument.DrawHtml(writer, 10);
+            this.viewDocument.DrawHtml(writer, 10, new XmlDiffViewRenderState { OmitMatches = omitMatches });
         }
 
         #endregion
