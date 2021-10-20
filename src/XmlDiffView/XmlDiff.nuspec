@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MarkRobertsSoftware.XmlDiff</id>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
     <authors>Chris Lovett, Mark Roberts</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/markalroberts/xmldiff</projectUrl>
@@ -12,6 +12,7 @@
     <copyright>Original work copyright © 2021 Lovett Software. Modified work copyright © 2021 Mark Roberts.</copyright>
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
+    <readme>docs\readme.md</readme>
     <dependencies>
       <group targetFramework=".NETFramework4" />
       <group targetFramework=".NETFramework4.5.2" />
@@ -67,5 +68,6 @@
     <file src=".\XmlDiffPatch.View.xml" target="lib\net4" />
     <!-- Assets -->
     <file src="icon.png"/>
+    <file src=".\readme.md" target="docs\" />
   </files>
 </package>
