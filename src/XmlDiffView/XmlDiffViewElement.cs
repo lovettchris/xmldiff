@@ -443,6 +443,11 @@ namespace Microsoft.XmlDiffPatch
                     return false;
                 }
 
+                if (node is XmlDiffViewElement element && element.Attributes != null && !IsDescendentAndSelfMatch(element.Attributes, false))
+                {
+                    return false;
+                }
+
                 if (node.FirstChildNode != null && !IsDescendentAndSelfMatch(node.FirstChildNode, false))
                 {
                     return false;
