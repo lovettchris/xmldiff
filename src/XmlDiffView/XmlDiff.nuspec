@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
     <repository type="git" url="https://github.com/lovettchris/xmldiff"/>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright © 2021 Lovett Software.</copyright>
+    <copyright>Copyright © 2023 Lovett Software.</copyright>
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
     <dependencies>
@@ -21,7 +21,7 @@
       <group targetFramework=".NETStandard2.0" />
       <group targetFramework=".NETStandard2.1" />
       <group targetFramework=".netcoreapp3.1" />
-      <group targetFramework=".NET5.0" />
+      <group targetFramework=".net6.0" />
     </dependencies>
   </metadata>
   <files>
@@ -41,10 +41,10 @@
     <file src=".\XmlDiffPatch.View.xml" target="lib\netcoreapp3.1" />
     <file src=".\bin\Release\netcoreapp3.1\*.json" target="lib\netcoreapp3.1" />
     <!-- .NET Framework 5.0 -->
-    <file src=".\bin\Release\net5.0\*.dll" target="lib\net5.0" />
-    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net5.0" />
-    <file src=".\XmlDiffPatch.View.xml" target="lib\net5.0" />
-    <file src=".\bin\Release\net5.0\*.json" target="lib\net5.0" />
+    <file src=".\bin\Release\net6.0\*.dll" target="lib\net6.0" />
+    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net6.0" />
+    <file src=".\XmlDiffPatch.View.xml" target="lib\net6.0" />
+    <file src=".\bin\Release\net6.0\*.json" target="lib\net6.0" />
     <!-- .NET Framework 4.8 -->
     <file src=".\bin\Release\net48\*.dll" target="lib\net48" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net48" />
@@ -61,10 +61,6 @@
     <file src=".\bin\Release\net452\*.dll" target="lib\net452" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net452" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\net452" />
-    <!-- .NET Framework 4 -->
-    <file src=".\bin\Release\net4\*.dll" target="lib\net4" />
-    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net4" />
-    <file src=".\XmlDiffPatch.View.xml" target="lib\net4" />
     <!-- Assets -->
     <file src="icon.png"/>
   </files>
