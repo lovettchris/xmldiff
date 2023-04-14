@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
@@ -40,7 +40,7 @@
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\netcoreapp3.1" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\netcoreapp3.1" />
     <file src=".\bin\Release\netcoreapp3.1\*.json" target="lib\netcoreapp3.1" />
-    <!-- .NET Framework 5.0 -->
+    <!-- .NET Framework 6.0 -->
     <file src=".\bin\Release\net6.0\*.dll" target="lib\net6.0" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net6.0" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\net6.0" />

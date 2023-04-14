@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <Company>Lovett Software</Company>
+    <Copyright>Copyright © Lovett Software</Copyright>  
+    <FileVersion>1.0.5</FileVersion>
+    <AssemblyVersion>1.0.5</AssemblyVersion>
+    <Version>1.0.5</Version>
+  </PropertyGroup>
+</Project>

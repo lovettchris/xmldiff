@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../Common/version.props" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net452;net46;net47;net48;netcoreapp3.1;net6.0</TargetFrameworks>
     <DefineConstants>MEASURE_PERF;TRACE;DESCRIPTORS;DESCRIPTOR_MOVE;DESCRIPTOR_PREFIX_OR_NAMESPACE;VERIFY_HASH_VALUES</DefineConstants>
     <PackageId>XmlDiffPatch</PackageId>
-    <Copyright>Copyright © Microsoft</Copyright>
-    <Company>Microsoft Corporation</Company>
     <Authors>Chris Lovett</Authors>
     <Product>XmlDiffPatch 1.0</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -15,21 +14,13 @@
     <PackageTags>xml;xml notepad;xmldiff</PackageTags>
     <AssemblyName>XmlDiffPatch</AssemblyName>
     <RootNamespace>Microsoft.XmlDiffPatch</RootNamespace>
-    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
     <Description>A library that compares XML files</Description>
-    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.1|AnyCPU'">
     <DocumentationFile>$(ProjectDir)\XmlDiffPatch.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework) == net452 or $(TargetFramework) == net46 or $(TargetFramework) == net47 or $(TargetFramework) == net48">
-    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
-    <SignManifests Condition="'$(AssemblyOriginatorKeyFile)'!=''">true</SignManifests>
-    <SignAssembly Condition="'$(AssemblyOriginatorKeyFile)'!=''">true</SignAssembly>
-    <ManifestTimestampUrl>http://timestamp.sectigo.com</ManifestTimestampUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Include="icon.png">

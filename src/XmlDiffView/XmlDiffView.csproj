@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../Common/version.props" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net452;net46;net47;net48;netcoreapp3.1;net6.0</TargetFrameworks>
     <PackageId>XmlDiffView</PackageId>
-    <Copyright>Copyright © Microsoft</Copyright>
-    <Company>Lovett Software</Company>
     <Authors>Chris Lovett</Authors>
     <Product>XmlDiffView 1.0</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -14,21 +13,13 @@
     <PackageTags>xml;xmldiff</PackageTags>
     <AssemblyName>XmlDiffPatch.View</AssemblyName>
     <RootNamespace>Microsoft.XmlDiffPatch.View</RootNamespace>
-    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <Description>Displays the results of an XML file comparison</Description>
     <DelaySign>false</DelaySign>
-    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DocumentationFile>$(ProjectDir)\XmlDiffPatch.View.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework) == net452 or $(TargetFramework) == net46 or $(TargetFramework) == net47 or $(TargetFramework) == net48">
-    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
-    <SignManifests Condition="'$(AssemblyOriginatorKeyFile)'!=''">true</SignManifests>
-    <SignAssembly Condition="'$(AssemblyOriginatorKeyFile)'!=''">true</SignAssembly>
-    <ManifestTimestampUrl>http://timestamp.sectigo.com</ManifestTimestampUrl>
   </PropertyGroup>
 
   <ItemGroup>
