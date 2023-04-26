@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
