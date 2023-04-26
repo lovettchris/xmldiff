@@ -51,7 +51,7 @@ public class XmlPatch
 		Patch( ref sourceNode, diffgram );
         Debug.Assert( sourceNode == sourceDoc );
 	}
-    
+
     /// <summary>
     ///    Reads the XDL diffgram from the diffgramFileName and modifies the original XML document
     ///    sourceDoc according to the changes described in the diffgram. 
@@ -59,7 +59,8 @@ public class XmlPatch
     /// <param name="sourceFile">The original xml document</param>
     /// <param name="outputStream">The output stream to write results to</param>
     /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
-	public void Patch( string sourceFile, Stream outputStream, XmlReader diffgram ) 
+    /// <param name="outputEncoding">The encoding to use in the output stream</param>
+    public void Patch( string sourceFile, Stream outputStream, XmlReader diffgram, string outputEncoding = "utf-8") 
 	{
         if ( sourceFile == null )
             throw new ArgumentNullException( "sourceFile" );
@@ -71,6 +72,8 @@ public class XmlPatch
         XmlDocument diffDoc = new XmlDocument();
         diffDoc.Load( diffgram );
 
+        var enc = Encoding.GetEncoding(outputEncoding);
+
         // patch fragment
         if ( diffDoc.DocumentElement.GetAttribute( "fragments" ) == "yes" ) {
             NameTable nt = new NameTable();
@@ -80,12 +83,12 @@ public class XmlPatch
                                                     XmlNodeType.Element,
                                                     new XmlParserContext(nt, new XmlNamespaceManager(nt),
                                                                         string.Empty, XmlSpace.Default));
-                Patch(tr, outputStream, diffDoc);
+                Patch(tr, outputStream, diffDoc, enc);
             }
         }
         // patch document
         else {
-            Patch ( new XmlTextReader( sourceFile ), outputStream, diffDoc );
+            Patch ( new XmlTextReader( sourceFile ), outputStream, diffDoc, enc);
         }
 	}
 
@@ -96,7 +99,8 @@ public class XmlPatch
     /// <param name="sourceReader">The original xml document</param>
     /// <param name="outputStream">The output stream to write results to.</param>
     /// <param name="diffgram">XmlReader for the XDL diffgram.</param>
-    public void Patch( XmlReader sourceReader, Stream outputStream, XmlReader diffgram ) {
+    /// <param name="outputEncoding">The encoding to use in the output stream</param>
+    public void Patch( XmlReader sourceReader, Stream outputStream, XmlReader diffgram, string outputEncoding = "utf-8") {
         if ( sourceReader == null )
             throw new ArgumentNullException( "sourceReader" );
         if ( outputStream == null )
@@ -106,13 +110,13 @@ public class XmlPatch
 
         XmlDocument diffDoc = new XmlDocument();
         diffDoc.Load( diffgram );
-
-        Patch( sourceReader, outputStream, diffDoc );
+            
+        var enc = Encoding.GetEncoding(outputEncoding);
+        Patch( sourceReader, outputStream, diffDoc, enc);
     }
 
-    private void Patch( XmlReader sourceReader, Stream outputStream, XmlDocument diffDoc ) {
+    private void Patch( XmlReader sourceReader, Stream outputStream, XmlDocument diffDoc, Encoding enc) {
         bool bFragments = diffDoc.DocumentElement.GetAttribute( "fragments" ) == "yes"; 
-        Encoding enc = null;
 
         if ( bFragments ) {
             // load fragment
@@ -131,18 +135,6 @@ public class XmlPatch
                         frag.AppendChild( node );
                         break;
                 }
-
-                if ( enc == null ) {
-                    if ( sourceReader is XmlTextReader ) {
-                        enc = ((XmlTextReader)sourceReader).Encoding;
-                    }
-                    else if ( sourceReader is XmlValidatingReader ) {
-                        enc = ((XmlValidatingReader)sourceReader).Encoding;
-                    }
-                    else {
-                        enc = Encoding.Unicode;
-                    }
-                }
             }
 
             // patch
@@ -154,7 +146,7 @@ public class XmlPatch
             if ( frag.FirstChild != null && frag.FirstChild.NodeType == XmlNodeType.XmlDeclaration ) {
                 enc = Encoding.GetEncoding( ((XmlDeclaration)sourceNode.FirstChild).Encoding );
             }
-            XmlTextWriter tw = new XmlTextWriter( outputStream, enc );
+            XmlTextWriter tw = new XmlTextWriter(outputStream, enc);
             frag.WriteTo( tw );
             tw.Flush();
         }

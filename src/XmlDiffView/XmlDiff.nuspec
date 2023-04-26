@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
@@ -13,7 +13,6 @@
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
     <dependencies>
-      <group targetFramework=".NETFramework4" />
       <group targetFramework=".NETFramework4.5.2" />
       <group targetFramework=".NETFramework4.6" />
       <group targetFramework=".NETFramework4.7" />
@@ -22,6 +21,7 @@
       <group targetFramework=".NETStandard2.1" />
       <group targetFramework=".netcoreapp3.1" />
       <group targetFramework=".net6.0" />
+      <group targetFramework=".net7.0" />
     </dependencies>
   </metadata>
   <files>
@@ -45,6 +45,11 @@
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net6.0" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\net6.0" />
     <file src=".\bin\Release\net6.0\*.json" target="lib\net6.0" />
+    <!-- .NET Framework 7.0 -->
+    <file src=".\bin\Release\net7.0\*.dll" target="lib\net7.0" />
+    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net7.0" />
+    <file src=".\XmlDiffPatch.View.xml" target="lib\net7.0" />
+    <file src=".\bin\Release\net7.0\*.json" target="lib\net7.0" />
     <!-- .NET Framework 4.8 -->
     <file src=".\bin\Release\net48\*.dll" target="lib\net48" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net48" />

@@ -2,7 +2,7 @@
 
   <Import Project="../Common/version.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net452;net46;net47;net48;netcoreapp3.1;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net452;net46;net47;net48;netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
     <DefineConstants>MEASURE_PERF;TRACE;DESCRIPTORS;DESCRIPTOR_MOVE;DESCRIPTOR_PREFIX_OR_NAMESPACE;VERIFY_HASH_VALUES</DefineConstants>
     <PackageId>XmlDiffPatch</PackageId>
     <Authors>Chris Lovett</Authors>
