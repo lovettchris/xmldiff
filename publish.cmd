@@ -10,6 +10,10 @@ for /f "usebackq" %%i in (%ROOT%src\Common\version.txt) do (
 if "%VERSION%" == "" goto :noversion
 
 echo ### Publishing version %VERSION% ...
+
+set /P answer=Did you remember to update src\Common\changes.xml (y/n) ?
+if /I "%answer%" NEQ "y" goto :eof
+
 set GITRELEASE=1
 
 :parse
@@ -41,7 +45,9 @@ if ERRORLEVEL 1 goto :err_compress
 if "%GITRELEASE%" == "0" goto :finished
 
 echo Creating new release for version %VERSION%
-gh release create %VERSION% "LovettSoftware.XmlDiff.%VERSION%.nupkg" "%ZIPFILE%" --title "Xml Diff %VERSION%"
+xsl -e -s src\Common\LatestVersion.xslt src\Common\changes.xml > notes.txt
+gh release create %VERSION% "LovettSoftware.XmlDiff.%VERSION%.nupkg" "%ZIPFILE%" --notes-file notes.txt --title "Xml Diff %VERSION%"
+del notes.txt
 
 :finished
 call gitweb

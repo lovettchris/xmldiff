@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="Updates.xslt"?>
+<updates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Updates.xsd">
+  <version number="1.0.7">
+    <feature>Add .net 7.0 libraries.</feature>
+    <bug>Exception in DifferencesSideBySideAsHtml</bug>
+  </version>
+  <version number="1.0.5">
+    <feature>Code sign assemblies.</feature>
+    <feature>Add .NET 6.0.</feature>
+  </version>
+  <version number="1.0.4">
+    <feature>Add some unit tests.</feature>
+    <bug>Fix premature close of streams in XmlDiff.OpenFragments</bug>
+  </version>
+  <version number="1.0.3">
+    <bug>Fixes to HTML legend</bug>
+  </version>
+</updates>
