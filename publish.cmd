@@ -2,6 +2,7 @@
 SETLOCAL EnableDelayedExpansion
 cd %~dp0
 SET ROOT=%~dp0
+set PATH=%PATH%;%ROOT%\tools
 set ZIPFILE=%ROOT%publish\XmlDiff.zip
 for /f "usebackq" %%i in (%ROOT%src\Common\version.txt) do (
     set VERSION=%%i
