@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A880F19D-4487-4DD8-A987-1FD87FB7E15F}"
 	ProjectSection(SolutionItems) = preProject
+		Common\changes.xml = Common\changes.xml
 		Common\version.props = Common\version.props
 	EndProjectSection
 EndProject

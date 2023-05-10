@@ -14,7 +14,8 @@
     <PackageTags>xml;xml notepad;xmldiff</PackageTags>
     <AssemblyName>XmlDiffPatch</AssemblyName>
     <RootNamespace>Microsoft.XmlDiffPatch</RootNamespace>
-    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <Description>A library that compares XML files</Description>
   </PropertyGroup>

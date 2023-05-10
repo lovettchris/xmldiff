@@ -25,7 +25,7 @@ goto :parse
 :done
 
 git clean -dfx
-pwsh -f %ROOT%src\Common\fix_version.ps1
+pwsh -f %ROOT%src\Common\fix_versions.ps1
 
 nuget restore src\XmlDiff.sln
 if ERRORLEVEL 1 goto :norestore

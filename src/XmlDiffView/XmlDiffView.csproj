@@ -13,9 +13,10 @@
     <PackageTags>xml;xmldiff</PackageTags>
     <AssemblyName>XmlDiffPatch.View</AssemblyName>
     <RootNamespace>Microsoft.XmlDiffPatch.View</RootNamespace>
-    <SignAssembly>false</SignAssembly>
-    <Description>Displays the results of an XML file comparison</Description>
+    <AssemblyOriginatorKeyFile>$(MyKeyFile)</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
+    <Description>Displays the results of an XML file comparison</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">

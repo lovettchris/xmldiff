@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="Updates.xslt"?>
 <updates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Updates.xsd">
+  <version number="1.0.8">
+    <bug>Add back strong naming for XmlDiffPatch.dll</bug>
+  </version>
   <version number="1.0.7">
     <feature>Add .net 7.0 libraries.</feature>
     <bug>Exception in DifferencesSideBySideAsHtml</bug>
