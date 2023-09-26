@@ -514,7 +514,9 @@ namespace Microsoft.XmlDiffPatch
             
             this.outputData = new StreamWriter(
                 data,
-                System.Text.Encoding.Unicode);
+                System.Text.Encoding.Unicode, 
+                bufferSize: 16000,
+                leaveOpen: true);
 
             bool identicalData = false;
             try
@@ -536,6 +538,7 @@ namespace Microsoft.XmlDiffPatch
 
             // Generate the final output using the returned values
             // from the differences comparison.
+            data.Seek(0, SeekOrigin.Begin);
             this.finalOutput = new XmlDiffViewResults(data, identicalData);
             
             // return result of comparison

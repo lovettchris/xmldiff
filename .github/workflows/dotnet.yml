@@ -14,12 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: |
+          3.1.x
+          6.0.x
+          7.0.x
     - name: Restore dependencies
       run: dotnet restore ./src/XmlDiff.sln
     - name: Build
       run: dotnet build --no-restore ./src/XmlDiff.sln
-    - name: Test
-      run: dotnet test --no-build --verbosity normal  ./src/XmlDiff.sln
+    - name: Test for .NET 6.0
+      run: dotnet test --no-build --verbosity normal  ./src/XmlDiff.sln /p:TargetFramework=net6.0

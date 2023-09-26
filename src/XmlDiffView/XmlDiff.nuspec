@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>MarkRobertsSoftware.XmlDiff</id>
-    <version>1.1.4</version>
-    <authors>Chris Lovett, Mark Roberts</authors>
+    <id>LovettSoftware.XmlDiff</id>
+    <version>1.0.9</version>
+    <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
     <projectUrl>https://github.com/markalroberts/xmldiff</projectUrl>
     <repository type="git" url="https://github.com/markalroberts/xmldiff"/>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Original work copyright © 2021 Lovett Software. Modified work copyright © 2021 Mark Roberts.</copyright>
+    <copyright>Copyright © 2023 Lovett Software. Copyright © 2021 Mark Roberts.</copyright>
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
     <readme>docs\readme.md</readme>
     <dependencies>
-      <group targetFramework=".NETFramework4" />
       <group targetFramework=".NETFramework4.5.2" />
       <group targetFramework=".NETFramework4.6" />
       <group targetFramework=".NETFramework4.7" />
@@ -22,7 +21,8 @@
       <group targetFramework=".NETStandard2.0" />
       <group targetFramework=".NETStandard2.1" />
       <group targetFramework=".netcoreapp3.1" />
-      <group targetFramework=".NET5.0" />
+      <group targetFramework=".net6.0" />
+      <group targetFramework=".net7.0" />
     </dependencies>
   </metadata>
   <files>
@@ -41,11 +41,16 @@
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\netcoreapp3.1" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\netcoreapp3.1" />
     <file src=".\bin\Release\netcoreapp3.1\*.json" target="lib\netcoreapp3.1" />
-    <!-- .NET Framework 5.0 -->
-    <file src=".\bin\Release\net5.0\*.dll" target="lib\net5.0" />
-    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net5.0" />
-    <file src=".\XmlDiffPatch.View.xml" target="lib\net5.0" />
-    <file src=".\bin\Release\net5.0\*.json" target="lib\net5.0" />
+    <!-- .NET Framework 6.0 -->
+    <file src=".\bin\Release\net6.0\*.dll" target="lib\net6.0" />
+    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net6.0" />
+    <file src=".\XmlDiffPatch.View.xml" target="lib\net6.0" />
+    <file src=".\bin\Release\net6.0\*.json" target="lib\net6.0" />
+    <!-- .NET Framework 7.0 -->
+    <file src=".\bin\Release\net7.0\*.dll" target="lib\net7.0" />
+    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net7.0" />
+    <file src=".\XmlDiffPatch.View.xml" target="lib\net7.0" />
+    <file src=".\bin\Release\net7.0\*.json" target="lib\net7.0" />
     <!-- .NET Framework 4.8 -->
     <file src=".\bin\Release\net48\*.dll" target="lib\net48" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net48" />
@@ -62,10 +67,6 @@
     <file src=".\bin\Release\net452\*.dll" target="lib\net452" />
     <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net452" />
     <file src=".\XmlDiffPatch.View.xml" target="lib\net452" />
-    <!-- .NET Framework 4 -->
-    <file src=".\bin\Release\net4\*.dll" target="lib\net4" />
-    <file src="..\XmlDiff\XmlDiffPatch.xml" target="lib\net4" />
-    <file src=".\XmlDiffPatch.View.xml" target="lib\net4" />
     <!-- Assets -->
     <file src="icon.png"/>
     <file src=".\readme.md" target="docs\" />

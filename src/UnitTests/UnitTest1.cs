@@ -37,25 +37,46 @@ namespace UnitTests
         [Fact]
         public void SimpleFragment()
         {
-            using var col = new TempFileCollection();
-            var file1 = col.CreateTempFile("<a></a><b></b>");
-            var file2 = col.CreateTempFile("<a></a><b></b><c></c>");
-
-            XmlDiff diff = new XmlDiff();
-
-            var sw = new StringWriter();
-            var settings = new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = false };
-            using (var writer = XmlWriter.Create(sw, settings))
+            using (var col = new TempFileCollection())
             {
-                Assert.False(diff.Compare(file1, file2, true, writer));
+                var file1 = col.CreateTempFile("<a></a><b></b>");
+                var file2 = col.CreateTempFile("<a></a><b></b><c></c>");
+
+                XmlDiff diff = new XmlDiff();
+
+                var sw = new StringWriter();
+                var settings = new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = false };
+                using (var writer = XmlWriter.Create(sw, settings))
+                {
+                    Assert.False(diff.Compare(file1, file2, true, writer));
+                }
+
+                XmlDocument result = new XmlDocument();
+                result.LoadXml(sw.ToString());
+
+                var inner = ToComparibleString(result);
+                var expected = "<xd:xmldiff version=\"1.0\" options=\"None\" fragments=\"yes\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match=\"2\" /><xd:add><c /></xd:add></xd:xmldiff>";
+                Assert.Equal(inner, expected);
             }
+        }
 
-            XmlDocument result = new XmlDocument();
-            result.LoadXml(sw.ToString());
+        [Fact]
+        public void SideBySideDiffView()
+        {
+            using (var col = new TempFileCollection())
+            {
+                var xmlSource = col.CreateTempFile("<root><a></a><b><temp/></b></root>");
+                var xmlChanged = col.CreateTempFile("<root><a id='1'></a><b></b><c></c></root>");
 
-            var inner = ToComparibleString(result); 
-            var expected = "<xd:xmldiff version=\"1.0\" options=\"None\" fragments=\"yes\" xmlns:xd=\"http://schemas.microsoft.com/xmltools/2002/xmldiff\"><xd:node match=\"2\" /><xd:add><c /></xd:add></xd:xmldiff>";
-            Assert.Equal(inner, expected);
+                var view = new XmlDiffView();
+                var options = XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace;
+                var results = view.DifferencesSideBySideAsHtml(xmlSource, xmlChanged, false, options);
+
+                var diff = results.ReadToEnd();
+                Assert.Contains("<span class=\"remove\">&lt;temp</span>", diff);
+                Assert.Contains("<span class=\"add\">id=\"1\"</span>", diff);
+                Assert.Contains("<span class=\"add\">&lt;c</span>", diff);
+            }
         }
 
         private string ToComparibleString(XmlDocument doc)
