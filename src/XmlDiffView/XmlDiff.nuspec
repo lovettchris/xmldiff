@@ -5,8 +5,8 @@
     <version>1.0.9</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
-    <projectUrl>https://github.com/markalroberts/xmldiff</projectUrl>
-    <repository type="git" url="https://github.com/markalroberts/xmldiff"/>
+    <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
+    <repository type="git" url="https://github.com/lovettchris/xmldiff"/>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright © 2023 Lovett Software. Copyright © 2021 Mark Roberts.</copyright>
