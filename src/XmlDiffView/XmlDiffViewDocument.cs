@@ -77,9 +77,10 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal override void DrawHtml(XmlWriter writer, int indent) 
+        /// <param name="renderState"></param>
+        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState) 
         {
-            HtmlDrawChildNodes(writer, indent);
+            HtmlDrawChildNodes(writer, indent, renderState);
         }
     
         /// <summary>

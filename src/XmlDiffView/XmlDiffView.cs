@@ -556,12 +556,12 @@ namespace Microsoft.XmlDiffPatch
         /// TextWriter object (which may be a file).
         /// </summary>
         /// <param name="htmlOutput">Data stream for output</param>
-        public void GetHtml(TextWriter htmlOutput)
+        public void GetHtml(TextWriter htmlOutput, bool omitMatches = false)
         {
             LastVisitedOpId = 0;
             XmlDiffViewNode.ResetLineNumbers();
             XmlTextWriter writer = new XmlTextWriter(htmlOutput);
-            this.viewDocument.DrawHtml(writer, 10);
+            this.viewDocument.DrawHtml(writer, 10, new XmlDiffViewRenderState { OmitMatches = omitMatches });
         }
 
         #endregion
@@ -637,6 +637,21 @@ namespace Microsoft.XmlDiffPatch
             writer.WriteStartElement("br");
             writer.WriteEndElement();
         }
+
+        /// <summary>
+        /// Writes a block to represent one or more matched elements
+        /// </summary>
+        /// <param name="writer">Output data stream</param>
+        internal static void HtmlOmissionBlock(XmlWriter writer)
+        {
+            writer.WriteStartElement("tr");
+            writer.WriteAttributeString("class", "matchblock");
+            writer.WriteStartElement("td");
+            writer.WriteAttributeString("colspan", "3");
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
 
         /// <summary>
         /// Starts a new row in the table

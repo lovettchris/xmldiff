@@ -2,16 +2,17 @@
 <package >
   <metadata>
     <id>LovettSoftware.XmlDiff</id>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <authors>Chris Lovett</authors>
     <description>A library that compares and merges XML files.</description>
-    <projectUrl>https://github.com/lovettchris/xmldiff</projectUrl>
-    <repository type="git" url="https://github.com/lovettchris/xmldiff"/>
+    <projectUrl>https://github.com/markalroberts/xmldiff</projectUrl>
+    <repository type="git" url="https://github.com/markalroberts/xmldiff"/>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright © 2023 Lovett Software.</copyright>
+    <copyright>Copyright © 2023 Lovett Software. Copyright © 2021 Mark Roberts.</copyright>
     <icon>icon.png</icon>
     <tags>xml;xmldiff</tags>
+    <readme>docs\readme.md</readme>
     <dependencies>
       <group targetFramework=".NETFramework4.5.2" />
       <group targetFramework=".NETFramework4.6" />
@@ -68,5 +69,6 @@
     <file src=".\XmlDiffPatch.View.xml" target="lib\net452" />
     <!-- Assets -->
     <file src="icon.png"/>
+    <file src=".\readme.md" target="docs\" />
   </files>
 </package>

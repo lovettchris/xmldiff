@@ -203,12 +203,12 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal void HtmlDrawChildNodes(XmlWriter writer, int indent) 
+        internal void HtmlDrawChildNodes(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState) 
         {
             XmlDiffViewNode curChild = this.ChildNodes;
             while (curChild != null) 
             {
-                curChild.DrawHtml(writer, indent);
+                curChild.DrawHtml(writer, indent, xmlDiffViewRenderState);
                 curChild = curChild.NextSibling;
             }
         }

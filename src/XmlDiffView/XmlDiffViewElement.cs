@@ -276,8 +276,23 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal override void DrawHtml(XmlWriter writer, int indent)
+        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState)
         {
+            if (renderState.OmitMatches)
+            {
+                if (IsDescendentAndSelfMatch(this))
+                {
+                    if (!renderState.InOmissionBlock)
+                    {
+                        XmlDiffView.HtmlOmissionBlock(writer);
+                        renderState.InOmissionBlock = true;
+                    }
+                    return;
+                }
+
+                renderState.InOmissionBlock = false;
+            }
+
             XmlDiffViewOperation typeOfDifference = Operation;
             bool closeElement = false;
             XmlDiffView.HtmlStartRow(writer);
@@ -358,7 +373,7 @@ namespace Microsoft.XmlDiffPatch
             // child nodes
             if (ChildNodes != null)
             {
-                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent);
+                HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent, renderState);
 
                 // end element
                 XmlDiffView.HtmlStartRow(writer);
@@ -413,6 +428,37 @@ namespace Microsoft.XmlDiffPatch
                     XmlDiffView.HtmlEndCell(writer);
                 }
                 XmlDiffView.HtmlEndRow(writer);
+            }
+        }
+
+        /// <summary>
+        /// Return true if node and all descendents are unchanged
+        /// </summary>
+        private static bool IsDescendentAndSelfMatch(XmlDiffViewNode node, bool rootNode = true)
+        {
+            while (true)
+            {
+                if (node.Operation != XmlDiffViewOperation.Match)
+                {
+                    return false;
+                }
+
+                if (node is XmlDiffViewElement element && element.Attributes != null && !IsDescendentAndSelfMatch(element.Attributes, false))
+                {
+                    return false;
+                }
+
+                if (node.FirstChildNode != null && !IsDescendentAndSelfMatch(node.FirstChildNode, false))
+                {
+                    return false;
+                }
+
+                if (node.NextSibling == null || rootNode)
+                {
+                    return true;
+                }
+
+                node = node.NextSibling;
             }
         }
 

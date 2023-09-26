@@ -245,13 +245,14 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="deep">has children</param>
         /// <returns>a node object</returns>
         internal abstract XmlDiffViewNode Clone(bool deep);
-        
+
         /// <summary>
         /// Abstract method to generate html output data
         /// </summary>
         /// <param name="writer">data stream</param>
         /// <param name="indent">size of indentation</param>
-        internal abstract void DrawHtml(XmlWriter writer, int indent);
+        /// <param name="renderState">options and and additional state management for rendering</param>
+        internal abstract void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState);
 
         /// <summary>
         /// Abstract method to generate text output data
