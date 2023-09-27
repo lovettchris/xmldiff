@@ -78,7 +78,7 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output data stream</param>
         /// <param name="indent">size of indentation</param>
-        internal override void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState)
+        internal override void DrawHtml(XmlWriter writer, int indent)
         {
             if (Operation == XmlDiffViewOperation.Change)
             {

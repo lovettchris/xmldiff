@@ -19,6 +19,7 @@ namespace Microsoft.XmlDiffPatch
     using System.Xml;
     using System.IO;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Class to access the parent node object and its child node objects.
@@ -203,14 +204,99 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">output stream</param>
         /// <param name="indent">number of indentations</param>
-        internal void HtmlDrawChildNodes(XmlWriter writer, int indent, XmlDiffViewRenderState xmlDiffViewRenderState) 
+        internal void HtmlDrawChildNodes(XmlWriter writer, int indent) 
         {
             XmlDiffViewNode curChild = this.ChildNodes;
+            bool hasHidden = false;
+            bool hasVisible = false;
             while (curChild != null) 
             {
-                curChild.DrawHtml(writer, indent, xmlDiffViewRenderState);
+                if (curChild.Hidden)
+                {
+                    // consolidate adjacent hidden nodes into one elipsis.
+                    hasHidden = true;
+                }
+                else
+                {
+                    if (hasHidden)
+                    {
+                        WriteEllipsisRow(writer, indent);
+                        hasHidden = false;
+                    }
+                    hasVisible = true;
+                    curChild.DrawHtml(writer, indent);
+                }
                 curChild = curChild.NextSibling;
             }
+            if (hasVisible && hasHidden)
+            {
+                WriteEllipsisRow(writer, indent);
+            }
+        }
+
+        internal void WriteEllipsisRow(XmlWriter writer, int indent)
+        {
+            XmlDiffView.HtmlStartRow(writer);
+            this.DrawLineNumber(writer);
+            XmlDiffView.HtmlStartCell(writer, indent);
+            writer.WriteCharEntity('\u2026');
+            XmlDiffView.HtmlEndCell(writer);
+            XmlDiffView.HtmlStartCell(writer, indent);
+            writer.WriteCharEntity('\u2026');
+            XmlDiffView.HtmlEndCell(writer);
+            XmlDiffView.HtmlEndRow(writer);
+        }
+
+        public bool PruneMatchingElements()
+        {
+            // XmlDiffView.HtmlOmissionBlock(writer);
+            bool pruned = true;
+            XmlDiffViewNode node = this.ChildNodes;
+            while (node != null)
+            {
+                var hidden = true;
+                if (node.Operation != XmlDiffViewOperation.Match)
+                {
+                    hidden = false;
+                }
+                else if (node is XmlDiffViewElement element && element.Attributes != null)
+                {
+                    bool foundChangedAttribute = false;
+                    XmlDiffViewNode a = element.Attributes;
+                    while (a != null)
+                    {
+                        if (a.Operation != XmlDiffViewOperation.Match)
+                        {
+                            hidden = false;
+                            foundChangedAttribute = true;
+                            break;
+                        }
+                        a = a.NextSibling;
+                    }
+
+                    if (!foundChangedAttribute)
+                    {
+                        element.HideAttributes = true;
+                    }
+                }
+
+                if (node is XmlDiffViewParentNode container)
+                {
+                    if (!container.PruneMatchingElements())
+                    {
+                        hidden = false; // have to show this element then
+                    }
+                }
+
+                node.Hidden = hidden;
+                node = node.NextSibling;
+                if (!hidden)
+                {
+                    // then pass this up the tree.
+                    pruned = false;
+                }
+            }
+            return pruned;
         }
 
         /// <summary>

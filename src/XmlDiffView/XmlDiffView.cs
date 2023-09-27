@@ -425,13 +425,15 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="resultHtmlViewFile">the html output file</param>
         /// <param name="fragment">the file is only an Xml fragment</param>
         /// <param name="options">comparison filtering options</param>
+        /// <param name="omitIdenticalHtmlOutput">omit html output for identical xml elements</param>
         /// <returns>Differences were not found after filtering.</returns>
         public bool DifferencesSideBySideAsHtml(
             string sourceXmlFile,
             string changedXmlFile,
             string resultHtmlViewFile,
             bool fragment,
-            XmlDiffOptions options)
+            XmlDiffOptions options,
+            bool omitIdenticalHtmlOutput = false)
         {
             bool identicalData = this.DifferencesSideBySideAsHtml(
                 sourceXmlFile,
@@ -439,7 +441,8 @@ namespace Microsoft.XmlDiffPatch
                 resultHtmlViewFile,
                 fragment,
                 true,
-                options);
+                options,
+                omitIdenticalHtmlOutput);
 
             return identicalData;
         }
@@ -453,6 +456,7 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="fragment">the file is only an Xml fragment</param>
         /// <param name="appendToOutputFile">Append to existing output file</param>
         /// <param name="options">comparison filtering options</param>
+        /// <param name="omitIdenticalHtmlOutput">omit html output for identical xml elements</param>
         /// <returns>Differences were not found after filtering.</returns>
         public bool DifferencesSideBySideAsHtml(
             string sourceXmlFile,
@@ -460,7 +464,8 @@ namespace Microsoft.XmlDiffPatch
             string resultHtmlViewFile,
             bool fragment,
             bool appendToOutputFile,
-            XmlDiffOptions options)
+            XmlDiffOptions options,
+            bool omitIdenticalHtmlOutput = false)
         {
             // Append to the specified output file.
             FileMode mode;
@@ -481,11 +486,12 @@ namespace Microsoft.XmlDiffPatch
             bool identicalData;
             try
             {
-                identicalData = this.DifferencesSideBySideAsHtml(
+                identicalData = this.InternalDifferencesSideBySideAsHtml(
                     sourceXmlFile,
                     changedXmlFile,
                     fragment,
                     options,
+                    omitIdenticalHtmlOutput,
                     this.outputData);
             }
             finally
@@ -503,12 +509,14 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="changedXmlFile">the actual (or target) file</param>
         /// <param name="fragment">the file is only an Xml fragment</param>
         /// <param name="options">comparison filtering options</param>
+        /// <param name="omitIdenticalHtmlOutput">omit html output for identical xml elements</param>
         /// <returns>Differences were not found after filtering.</returns>
         public XmlDiffViewResults DifferencesSideBySideAsHtml(
             string sourceXmlFile,
             string changedXmlFile,
             bool fragment,
-            XmlDiffOptions options)
+            XmlDiffOptions options,
+            bool omitIdenticalHtmlOutput = false)
         {
             MemoryStream data = new MemoryStream();
             
@@ -521,11 +529,12 @@ namespace Microsoft.XmlDiffPatch
             bool identicalData = false;
             try
             {
-                identicalData = this.DifferencesSideBySideAsHtml(
+                identicalData = this.InternalDifferencesSideBySideAsHtml(
                     sourceXmlFile,
                     changedXmlFile,
                     fragment,
                     options,
+                    omitIdenticalHtmlOutput,
                     this.outputData);
 
             }
@@ -556,12 +565,18 @@ namespace Microsoft.XmlDiffPatch
         /// TextWriter object (which may be a file).
         /// </summary>
         /// <param name="htmlOutput">Data stream for output</param>
-        public void GetHtml(TextWriter htmlOutput, bool omitMatches = false)
+        /// <param name="omitMatches">Omit matching lines to compress the size of the HTML output</param>
+        /// <param name="indentPoints">HTML indent to show in points - default is padding-left: 10pt;</param>
+        public void GetHtml(TextWriter htmlOutput, bool omitMatches = false, int indentPoints = 10)
         {
             LastVisitedOpId = 0;
             XmlDiffViewNode.ResetLineNumbers();
             XmlTextWriter writer = new XmlTextWriter(htmlOutput);
-            this.viewDocument.DrawHtml(writer, 10, new XmlDiffViewRenderState { OmitMatches = omitMatches });
+            if (omitMatches)
+            {
+                this.viewDocument.PruneMatchingElements();
+            }
+            this.viewDocument.DrawHtml(writer, indentPoints);
         }
 
         #endregion
@@ -907,13 +922,15 @@ namespace Microsoft.XmlDiffPatch
         /// <param name="changedXmlFile">actual file</param>
         /// <param name="fragment">xml data fragment</param>
         /// <param name="options">Comparison options</param>
+        /// <param name="omitIdenticalHtmlOutput">omit html output for identical xml elements</param>
         /// <param name="resultHtml">output data</param>
         /// <returns>data is identical</returns>
-        private bool DifferencesSideBySideAsHtml(
+        private bool InternalDifferencesSideBySideAsHtml(
             string sourceXmlFile,
             string changedXmlFile,
             bool fragment,
             XmlDiffOptions options,
+            bool omitIdenticalHtmlOutput,
             TextWriter resultHtml)
         {
             bool identicalData = this.MarkupBaselineWithChanges(
@@ -929,7 +946,7 @@ namespace Microsoft.XmlDiffPatch
                 identicalData,
                 resultHtml);
 
-            this.GetHtml(resultHtml);
+            this.GetHtml(resultHtml, omitIdenticalHtmlOutput);
 
             this.SideBySideHtmlFooter(resultHtml);
 

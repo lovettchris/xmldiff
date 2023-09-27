@@ -79,6 +79,27 @@ namespace UnitTests
             }
         }
 
+        [Fact]
+        public void SideBySideDiffViewCompact()
+        {
+            using (var col = new TempFileCollection())
+            {
+                var xmlSource = col.CreateTempFile("<root id='3'><apple></apple><banana><temp/></banana><elephant size='big'/></root>");
+                var xmlChanged = col.CreateTempFile("<root id='3'><apple></apple><banana></banana><carrot/><elephant size='big'/></root>");
+
+                var view = new XmlDiffView();
+                var options = XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace;
+                var results = view.DifferencesSideBySideAsHtml(xmlSource, xmlChanged, false, options, true);
+
+                var diff = results.ReadToEnd();
+                Assert.Contains("root", diff);
+                Assert.Contains("banana", diff);
+                Assert.Contains("&lt;temp", diff);
+                Assert.DoesNotContain("apple", diff);
+                Assert.DoesNotContain("elephant", diff);
+            }
+        }
+
         private string ToComparibleString(XmlDocument doc)
         {
             // avoid comparing the hash.

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="Updates.xslt"?>
 <updates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Updates.xsd">
+  <application>
+    <title>Microsoft XML Diff</title>
+    <location>https://raw.githubusercontent.com/lovettchris/xmldiff/master/src/Common/changes.xml</location>
+    <download>https://www.nuget.org/packages/LovettSoftware.XmlDiff</download>
+    <installer>https://www.nuget.org/packages/LovettSoftware.XmlDiff</installer>
+    <history>https://github.com/microsoft/XmlNotepad/blob/master/src/Updates/Updates.xml</history>
+    <frequency>1.00:00:00</frequency>
+  </application>
+  <version number="1.1.0">
+    <feature>Thanks to Mark Roberts for a cool new feature that omits identical output to make the diff HTML output scale better on huge XML files.</feature>
+  </version>
   <version number="1.0.8">
     <bug>Add back strong naming for XmlDiffPatch.dll</bug>
   </version>

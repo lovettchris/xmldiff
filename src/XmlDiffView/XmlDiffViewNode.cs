@@ -189,6 +189,11 @@ namespace Microsoft.XmlDiffPatch
                 this.operation = value;
             }
         }
+
+        /// <summary>
+        /// This change is to be hidden from the rendered output.
+        /// </summary>
+        public bool Hidden { get; set; }
         
         /// <summary>
         /// Gets or sets the difference identifier number
@@ -251,8 +256,7 @@ namespace Microsoft.XmlDiffPatch
         /// </summary>
         /// <param name="writer">data stream</param>
         /// <param name="indent">size of indentation</param>
-        /// <param name="renderState">options and and additional state management for rendering</param>
-        internal abstract void DrawHtml(XmlWriter writer, int indent, XmlDiffViewRenderState renderState);
+        internal abstract void DrawHtml(XmlWriter writer, int indent);
 
         /// <summary>
         /// Abstract method to generate text output data
