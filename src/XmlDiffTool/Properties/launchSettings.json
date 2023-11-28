@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "XmlDiffTool": {
+      "commandName": "Project",
+      "commandLineArgs": "\"file1.xml\" \"file2.xml\" --format html out.htm",
+      "workingDirectory": "D:\\git\\lovettchris\\xmldiff"
+    }
+  }
+}

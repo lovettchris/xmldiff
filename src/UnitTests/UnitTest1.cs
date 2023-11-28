@@ -80,6 +80,25 @@ namespace UnitTests
         }
 
         [Fact]
+        public void RegressionMix()
+        {
+            using (var col = new TempFileCollection())
+            {
+                var xmlSource = col.CreateTempFile("<Profile><field><field>Approval_Workflow__c.Description__c</field></field><field><editable>false</editable><field>Approval_Workflow__c.Migration_Id__c</field><readable>false</readable></field><field><field>Approval_Workflow__c.Reject_PO_Substage__c</field></field><field><field>Location.VisitorAddressId</field></field><flow><flow>TestAccListApexFlow</flow></flow><layout><layout>Lead-LeadLayout</layout></layout><layout><layout>Macro-MacroLayout</layout></layout><layout><layout>OFAC__SDN_Match__c-OFAC__MatchLayout</layout></layout><layout><layout>OFAC__SDN_Search__c-OFAC__OFACRequestLayout</layout></layout><layout><layout>Oak_Office__c-OakOfficeLayout</layout></layout><objectPermissions><allowCreate>false</allowCreate><allowDelete>false</allowDelete><allowEdit>false</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords></objectPermissions><objectPermissions><object>Asset</object><viewAllRecords>false</viewAllRecords></objectPermissions></Profile>");
+                var xmlChanged = col.CreateTempFile("<Profile><field><field>Approval_Workflow__c.Description__c</field></field><field><editable>true</editable><field>Approval_Workflow__c.Migration_Id__c</field><readable>true</readable></field><field><field>Approval_Workflow__c.Reject_PO_Substage__c</field></field><field><field>Location.VisitorAddressId</field></field><layout><layout>Lead-LeadLayout</layout></layout><layout><layout>Location-LocationLayout</layout></layout><layout><layout>Macro-MacroLayout</layout></layout><layout><layout>Oak_Office__c-OakOfficeLayout</layout></layout><objectPermissions><allowCreate>false</allowCreate><allowDelete>false</allowDelete><allowEdit>false</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords><object>Address</object><viewAllRecords>false</viewAllRecords></objectPermissions><objectPermissions><allowCreate>false</allowCreate><allowDelete>false</allowDelete><allowEdit>false</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords><object>Asset</object><viewAllRecords>false</viewAllRecords></objectPermissions></Profile>");
+
+                var view = new XmlDiffView();
+                var options = XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace;
+                var results = view.DifferencesSideBySideAsHtml(xmlSource, xmlChanged, false, options);
+
+                var diff = results.ReadToEnd();
+                Assert.Contains("<span class=\"remove\">&lt;temp</span>", diff);
+                Assert.Contains("<span class=\"add\">id=\"1\"</span>", diff);
+                Assert.Contains("<span class=\"add\">&lt;c</span>", diff);
+            }
+        }
+
+        [Fact]
         public void SideBySideDiffViewCompact()
         {
             using (var col = new TempFileCollection())
